@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>解构平遥 · 民居建筑特征 | 晋商宅院深度解析</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: url("statics/背景4.jpeg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+            z-index: 0;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(1px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        h1.font-calligraphy {
+            font-size: 85px !important;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            color: #8a3a39;
+            text-shadow: 0 1px 3px rgba(138, 58, 57, 0.2), 0 3px 8px rgba(138, 58, 57, 0.12);
+            position: relative;
+            display: inline-block;
+        }
+
+        .font-calligraphy {
+            font-family: 'Ma Shan Zheng', cursive !important;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+        }
+
+        .font-serif-sc {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 300;
+        }
+
+        @keyframes navSlideIn {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .nav-slide-in {
+            animation: navSlideIn 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+
+        @keyframes logoGlow {
+            0%, 100% { filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3)); }
+            50% { filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.6)); }
+        }
+
+        .logo-glow {
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+
+        .nav-link-enhanced {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link-enhanced::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .nav-link-enhanced:hover::before {
+            left: 100%;
+        }
+
+        .nav-link-enhanced::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: #D4AF37;
+            transition: width 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-radius: 1px;
+        }
+
+        .nav-link-enhanced:hover::after {
+            width: 100%;
+        }
+
+        .nav-elegant {
+            background: linear-gradient(135deg, rgba(214, 128, 90, 0.95) 0%, rgba(160, 101, 52, 0.92) 50%, rgba(185, 118, 55, 0.89) 100%);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(212, 175, 55, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-dropdown {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .nav-dropdown-parent:hover .nav-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mobile-menu-btn {
+            position: relative;
+            width: 30px;
+            height: 30px;
+        }
+
+        .mobile-menu-btn span {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #D4AF37;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn span:nth-child(1) { top: 6px; }
+        .mobile-menu-btn span:nth-child(2) { top: 14px; }
+        .mobile-menu-btn span:nth-child(3) { top: 22px; }
+
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 14px;
+        }
+
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: 14px;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .card {
+            flex: 1 1 320px;
+            max-width: 400px;
+            background: #fffef9;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03), 0 2px 4 rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            overflow: hidden;
+            border: 1px solid #e6dfd5;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 30px 40px -12px rgba(0, 0, 0, 0.25);
+            border-color: #D4AF37;
+        }
+
+        .card:hover .diagram {
+            background: #fef5e8;
+            transition: background 0.3s ease;
+        }
+
+        .card-header {
+            padding: 1.3rem 1.5rem 0.8rem;
+            border-bottom: 1px solid #ede6dc;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            transition: all 0.3s;
+        }
+
+        .card:hover .card-header h2 {
+            color: #8B3A3A;
+            transition: color 0.3s;
+        }
+
+        .module-number {
+            font-size: 0.7rem;
+            font-weight: 60;
+            background: #e9e1d7;
+            padding: 0.2rem 0.7rem;
+            border-radius: 40px;
+            color: #6b4e3a;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+        }
+
+        .card:hover .module-number {
+            background: #D4AF37;
+            color: #3a2c27;
+        }
+
+        .card-header h2 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.7rem;
+            font-weight: 600;
+            color: #3a2c27;
+            transition: color 0.3s;
+        }
+
+.img-switch {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.img-switch img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transition: opacity 0.4s ease;
+    top: 0;
+    left: 0;
+}
+
+.img-switch .img-svg {
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* 确保线框图在上层 */
+}
+
+.img-switch .img-real {
+    opacity: 0;
+    z-index: 2; /* 实景图在上层，显示时覆盖 */
+}
+
+.img-switch.active .img-svg {
+    opacity: 0;
+    z-index: 1;
+}
+
+.img-switch.active .img-real {
+    opacity: 1;
+    z-index: 2;
+}
+        .diagram {
+            background: #fefaf5;
+            margin: 1rem 1.5rem;
+            border-radius: 18px;
+            padding: 0;
+            border: 1px solid #f0e7de;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 180px;
+            transition: all 0.3s ease;
+        }
+
+        .svg-sketch {
+            width: 100%;
+            max-width: 240px;
+            height: auto;
+            opacity: 0.85;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .svg-sketch {
+            transform: scale(1.02);
+            opacity: 1;
+        }
+
+        .content {
+            padding: 0.2rem 1.5rem 1.2rem;
+            flex: 1;
+        }
+
+        .quote {
+            font-size: 0.95rem;
+            color: #9a7b62;
+            border-left: 3px solid #dbc9b8;
+            padding-left: 0.8rem;
+            margin: 0.8rem 0;
+            font-style: normal;
+            font-weight: 400;
+            background: #fbf8f3;
+            border-radius: 0 8px 8px 0;
+            transition: all 0.3s;
+        }
+
+        .card:hover .quote {
+            border-left-color: #D4AF37;
+            background: #fffaf2;
+        }
+
+        .feature-list {
+            font-size: 0.95rem;
+            color: #4f443c;
+            margin-top: 0.5rem;
+            list-style: none;
+        }
+
+        .feature-list li {
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .feature-list li::before {
+            content: "⏺";
+            font-size: 0.8rem;
+            color: #b48c5c;
+            transition: color 0.3s;
+        }
+
+        .card:hover .feature-list li::before {
+            color: #D4AF37;
+        }
+
+        .card-action-btn {
+            margin: 0.5rem 1.5rem 1.2rem 1.5rem;
+            background: linear-gradient(135deg, #f5ede3, #ede3d7);
+            border: 1px solid #e0d4c8;
+            border-radius: 40px;
+            padding: 0.6rem 0;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #7a5a44;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .card-action-btn i {
+            font-size: 0.9rem;
+            transition: transform 0.3s;
+        }
+
+        .card-action-btn:hover {
+            background: linear-gradient(135deg, #e8d9cc, #dfcfc0);
+            border-color: #D4AF37;
+            color: #8B3A3A;
+            gap: 12px;
+        }
+
+        .card-action-btn:hover i {
+            transform: translateX(3px);
+        }
+
+        .img-tip {
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            margin-top: 6px;
+        }
+
+        .badge-tech {
+            font-size: 0.7rem;
+            background: #ede3d9;
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            margin-top: 0.8rem;
+            color: #6c4d36;
+        }
+
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #eeeae7;
+            border-top: 1px solid #e2d5c9;
+            padding-top: 2rem;
+        }
+
+        /* ========== 详情弹窗样式 ========== */
+        .detail-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(6px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .detail-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background: #fffef9;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            transform: translateY(30px);
+            transition: transform 0.4s ease;
+        }
+        .detail-modal.show .modal-content {
+            transform: translateY(0);
+        }
+        .close-btn {
+            position: absolute;
+            top: 18px;
+            right: 20px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #f5ede3;
+            border: none;
+            font-size: 18px;
+            color: #8B3A3A;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .close-btn:hover {
+            background: #8B3A3A;
+            color: white;
+        }
+        .modal-title {
+            font-family: 'Noto Serif SC';
+            font-size: 24px;
+            color: #8B3A3A;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        .modal-detail {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #5a4a3f;
+        }
+
+        @media (max-width: 760px) {
+            .container {
+                padding: 1rem;
+            }
+            h1.font-calligraphy {
+                font-size: 2.5rem !important;
+            }
+            .card {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+<nav class="fixed w-full z-50 nav-elegant nav-slide-in border-b border-[#D4AF37]/20">
+    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent"></div>
+    <div class="max-w-7xl mx-auto px-6 h-24 flex justify-between items-center">
+        <div class="flex items-center space-x-4 group cursor-pointer">
+            <div class="relative">
+                <div class="absolute -inset-3 bg-gradient-to-br from-[#D4AF37]/30 via-[#8B3A3A]/20 to-[#5C3A1E]/20 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+                <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-[#F5F0E8] to-[#E8DFD3] flex items-center justify-center shadow-xl transition-all duration-500 group-hover:scale-105 group-hover:rotate-[3deg] logo-glow overflow-hidden">
+                    <div class="absolute inset-[6px] border-2 border-[#8B3A3A]/40 rounded-lg"></div>
+                    <div class="absolute inset-[10px] border border-[#D4AF37]/50 rounded-sm"></div>
+                    <span class="font-calligraphy text-4xl text-[#8B3A3A] relative z-10 transition-all duration-300 group-hover:text-[#6B2828]">平</span>
+                    <div class="absolute top-1 left-1 w-4 h-4 border-t-2 border-l-2 border-[#D4AF37]/60"></div>
+                    <div class="absolute bottom-1 right-1 w-4 h-4 border-b-2 border-r-2 border-[#D4AF37]/60"></div>
+                </div>
+                <div class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#D4AF37] rounded-full shadow-md"></div>
+                <div class="absolute -bottom-1 left-1 w-2.5 h-2.5 bg-[#8B3A3A] rounded-full shadow-md"></div>
+            </div>
+            <div class="flex flex-col">
+                <span class="font-calligraphy text-2xl text-[#F5F0E8] font-bold tracking-[0.15em] transition-colors duration-300 group-hover:text-[#D4AF37]">平遥古城</span>
+                <span class="font-serif-sc text-xs text-[#D4C4B0] tracking-[0.3em] opacity-90 mt-1">PINGYAO ANCIENT CITY</span>
+                <div class="w-20 h-0.5 bg-gradient-to-r from-[#D4AF37] to-transparent mt-2 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+            </div>
+        </div>
+
+        <div class="hidden lg:flex items-center space-x-1">
+            <div class="flex items-center space-x-1 bg-gradient-to-r from-[#5C3A1E]/20 to-[#8B3A3A]/20 backdrop-blur-sm rounded-2xl px-2 py-2 border border-[#D4AF37]/10">
+                <div class="nav-dropdown-parent relative">
+                    <a href="index.html" class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+                        <i class="fas fa-home text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                        <span>首页</span>
+                    </a>
+
+                </div>
+                <div class="w-px h-6 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+                <div class="nav-dropdown-parent relative">
+                    <a href="探索民居.html" class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+                        <i class="fas fa-building text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                        <span>探索民居</span>
+                    </a>
+
+                </div>
+                <div class="w-px h-6 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+                <div class="nav-dropdown-parent relative">
+                    <a href="解构建筑.html" class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group border-b-2 border-[#D4AF37]">
+                        <i class="fas fa-archway text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                        <span>解构建筑</span>
+                    </a>
+                </div>
+                <div class="w-px h-6 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+                <a href="营造四因.html" class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+                    <i class="fas fa-theater-masks text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                    <span>营造四因</span>
+                </a>
+                <div class="nav-dropdown-parent relative">
+                <a href="javascript:void(0)" onclick="toggleDropdown()" class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+                    <i class="fas fa-theater-masks text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                    <span>互动体验</span>
+                </a>
+
+                        <!-- 下拉菜单 -->
+                    <div id="dropdownMenu" class="nav-dropdown absolute left-0 mt-2 w-48 bg-[#5C3A1E]/95 backdrop-blur-md rounded-xl shadow-lg border border-[#D4AF37]/20 overflow-hidden z-50 hidden">
+
+                    <a href="答题页面.html" class="block px-4 py-3 text-base font-serif-sc text-[#F5F0E8] hover:bg-[#8B3A3A]/30 hover:text-[#D4AF37] transition">
+                        🧠 答题页面
+                    </a>
+
+                    <a href="抽卡页面.html" class="block px-4 py-3 text-base font-serif-sc text-[#F5F0E8] hover:bg-[#8B3A3A]/30 hover:text-[#D4AF37] transition">
+                        🎴 抽卡页面
+                    </a>
+
+                    <a href="问答页面.html" class="block px-4 py-3 text-base font-serif-sc text-[#F5F0E8] hover:bg-[#8B3A3A]/30 hover:text-[#D4AF37] transition">
+                        💬 问答页面
+                    </a>
+
+                </div>
+            </div>
+                <div class="w-px h-6 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+                <a href="知筑践行.html" class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+                    <i class="fas fa-theater-masks text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                    <span>知筑践行</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="lg:hidden">
+            <button class="mobile-menu-btn relative z-50" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </div>
+    <div id="mobileMenu" class="lg:hidden absolute top-full left-0 w-full bg-gradient-to-b from-[#8B3A3A]/95 to-[#5C3A1E]/95 backdrop-blur-lg shadow-2xl border-b border-[#D4AF37]/20 transform -translate-y-full opacity-0 transition-all duration-300">
+        <div class="px-6 py-8">
+            <div class="space-y-4">
+                <a href="#" class="flex items-center space-x-3 px-4 py-3 text-[#F5F0E8] hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all duration-200"><i class="fas fa-home text-lg text-[#D4AF37]"></i><span class="font-serif-sc text-lg">首页</span></a>
+                <a href="#" class="flex items center space-x-3 px-4 py-3 text-[#F5F0E8] hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all duration-200"><i class="fas fa-building text-lg text-[#D4AF37]"></i><span class="font-serif-sc text-lg">探索民居</span></a>
+                <a href="#" class="flex items-center space-x-3 px-4 py-3 text-[#D4AF37] hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all duration-200"><i class="fas fa-archway text-lg text-[#D4AF37]"></i><span class="font-serif-sc text-lg font-semibold">解构建筑</span></a>
+                <a href="#" class="flex items-center space-x-3 px-4 py-3 text-[#F5F0E8] hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all duration-200"><i class="fas fa-theater-masks text-lg text-[#D4AF37]"></i><span class="font-serif-sc text-lg">文化体验</span></a>
+            </div>
+        </div>
+    </div>
+    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#D4AF37]/20 via-[#D4AF37] to-[#D4AF37]/20"></div>
+</nav>
+
+<div class="max-w-8xl mx-auto px-6 pt-40 pb-6 text-center">
+    <h1 class="font-calligraphy">平遥民居 · 建筑特征</h1>
+    <div class="relative mt-4 mb-10"></div>
+</div>
+
+<div class="container max-w-7xl mx-auto px-6 pb-20">
+    <div class="card-container" id="cardGrid"></div>
+
+    <!-- 详情弹窗 -->
+    <div class="detail-modal" id="detailModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <div class="modal-title" id="modalTitle"></div>
+            <div class="modal-detail" id="modalDetail"></div>
+        </div>
+    </div>
+
+    <div style="margin-top: 3rem; background: #faf6ef; border-radius: 28px; padding: 1.5rem; border: 1px solid #e4d8cc;">
+    <h3 style="font-family: 'Noto Serif SC'; font-weight: 500; display: flex; gap: 10px; align-items: center;">
+        🧱 建筑材料 · 平遥营造主材
+    </h3>
+    <p style="font-size: 0.9rem;color:#be976f; margin: 0.5rem 0 1.2rem; line-height: 1.6;">
+        平遥民居以青砖、木材、黄土、青瓦为核心主材，辅以石材、灰浆等，兼顾结构承重、围护保温与装饰美学，是晋商营造智慧的集中体现。
+    </p>
+
+    <!-- 四大主材分类 -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; margin-bottom: 1.2rem;">
+        <!-- 砖 -->
+        <div style="background: #fff; border-radius: 16px; padding: 1rem; border: 1px solid #e4d8cc;">
+            <h4 style="font-family: 'Noto Serif SC'; margin: 0 0 0.6rem; font-size: 1rem; color: #8b7355;">青砖</h4>
+            <p style="font-size: 0.95rem; line-height: 1.5; margin: 0 0 0.8rem;">
+                以青砖为主，既是围护构件，也是窑洞砖券的承重结构，用于墙体、铺地、楼梯及砖雕、影壁、脊饰等装饰。
+            </p>
+        </div>
+
+        <!-- 木 -->
+        <div style="background: #fff; border-radius: 16px; padding: 1rem; border: 1px solid #e4d8cc;">
+            <h4 style="font-family: 'Noto Serif SC'; margin: 0 0 0.6rem; font-size: 1rem; color: #8b7355;">木材</h4>
+            <p style="font-size: 0.95rem; line-height: 1.5; margin: 0 0 0.8rem;">
+                构成梁、柱、枋、椽等木构架体系，用于门窗、挑檐构件，以及挂落、翼拱、荷叶等装饰性木作，是院落空间的骨架。
+            </p>
+        </div>
+
+        <!-- 土 -->
+        <div style="background: #fff; border-radius: 16px; padding: 1rem; border: 1px solid #e4d8cc;">
+            <h4 style="font-family: 'Noto Serif SC'; margin: 0 0 0.6rem; font-size: 1rem; color: #8b7355;">黄土</h4>
+            <p style="font-size: 0.95rem; line-height: 1.5; margin: 0 0 0.8rem;">
+                分夯土与土壁两种：夯土用于地基、窑洞覆土；土壁用于墙体，分直接土壁墙与外青砖内土壁的软心墙，适配北方保温需求。
+            </p>
+        </div>
+
+        <!-- 瓦 -->
+        <div style="background: #fff; border-radius: 16px; padding: 1rem; border: 1px solid #e4d8cc;">
+            <h4 style="font-family: 'Noto Serif SC'; margin: 0 0 0.6rem; font-size: 1rem; color: #8b7355;">青瓦</h4>
+            <p style="font-size: 0.95rem; line-height: 1.5; margin: 0 0 0.8rem;">
+                屋顶采用筒板瓦覆面，檐口设滴水、勾头，屋脊设脊座、翼角瓦，兼具排水、装饰功能，构成古城统一的灰色天际线。
+            </p>
+        </div>
+    </div>
+
+    <!-- 其他辅助材料 -->
+    <div style="background: #fff; border-radius: 16px; padding: 1rem; border: 1px solid #e4d8cc; margin-bottom: 1rem;">
+        <h4 style="font-family: 'Noto Serif SC'; margin: 0 0 0.6rem; font-size: 1rem; color: #8b7355;">辅助材料</h4>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.8rem; font-size: 0.85rem;">
+            <span>▫️ 石材：墙基、柱础、台阶、石狮等</span>
+            <span>▫️ 灰浆：灰泥缝、抹墙、压瓦</span>
+            <span>▫️ 植物纤维：瓦顶隔热填充</span>
+            <span>▫️ 金属：五金、排水瓦件</span>
+        </div>
+    </div>
+
+    <div class="quote" style="margin-top: 0.8rem; font-family: 'Noto Serif SC';">
+        一砖一木一黄土，一瓦一灰一匠心，筑就平遥千年民居风骨。
+    </div>
+</div>
+    <footer>基于《平遥古城传统民居 保护修缮及环境治理实用导则》</footer>
+</div>
+
+<script>
+      function toggleDropdown() {
+    const menu = document.getElementById("dropdownMenu");
+
+    if (menu.classList.contains("hidden")) {
+        menu.classList.remove("hidden");
+    } else {
+        menu.classList.add("hidden");
+    }
+}
+    const cardsData = [
+        { name: "院墙", tag: "防御边界", quote: "“院墙封闭，极少开窗，高低错落形成丰富轮廓线”", features: ["防御性极强，清水砖墙，无装饰", "墙身、砖檐、墙帽三段式构造", "越高越精细，体现宅院等级"], detail: "平遥传统民居的院墙以防御和封闭为主要功能，墙体通常采用清水砖砌筑，外表朴素，极少开窗，形成了对外隔绝、对内守护的明确空间界限。这些院墙随不同宅院的布局与等级高低起伏，轮廓线错落有致，打破了街巷的单调感，营造出富有韵律的视觉节奏。墙身、砖檐与墙帽三部分一体构成，檐帽样式变化多样，既满足了实用需求，也展现了平遥民居严谨而又不失变化的建筑智慧。。", svg: "statics/院墙1.png", real: "statics/院墙2.png" },
+        { name: "大门", tag: "气口 · 等级", quote: "“门通出入，是为气口。抱鼓石、石狮、坡道俱全”", features: ["墙垣式：等级较低，常做垂花门", "屋宇式：开在倒座稍间，设抱鼓石、石狮", "车马院用拱门+坡道 (图3.19)"], detail: "大平遥民居的大门兼具通行、内外联系与户主身份标识的功能，且在风水上有“气口”的重要意义。大门主要为墙垣式与屋宇式两种：墙垣式多用于等级较低的住宅，常结合中轴设垂花门；屋宇式多位于倒座房稍间，朝吉位开设，门前有踏步、抱鼓石与影壁，门下设门槛，体现礼制等级。部分跨院与车马院设有拱门式大门，便于车马与仆人出入，功能与形式结合紧密。。", svg: "statics/大门1.png", real: "statics/大门2.png" },
+        {name: "影壁","tag": "隐蔽 · 辟邪","quote": "一进门即见影壁，使流线迂回，辟邪隐蔽","features": ["多设置在厢房山墙，与大门相对","增加空间层次感，实现院落私密过渡","雕刻吉祥图案（如莲花、蝙蝠等），兼具精神功能"],"detail": "影壁取“隐蔽”之意，避免门外直视内院，通过空间迂回营造私密感；同时雕刻吉祥图案，承载辟邪祈福的精神功能。","svg": "statics/影壁1.png","real": "statics/影壁2.png"},
+        {name: "壁龛","tag": "精神信仰 · 神位","quote": "壁龛设神位，祈福辟邪","features": ["位于正对院门的厢房山墙或独立墙体","内部设神位，供奉神灵或祖先","造型简约或与院落风格协调，兼具装饰性"],"detail": "壁龛是家庭精神空间的载体，通过供奉神位实现祈福辟邪的功能；常见于正对院门的山墙，既强化院落精神属性，又在空间上形成视觉焦点。","svg": "statics/壁龛1.png","real": "statics/壁龛2.png"},
+        { name: "倒座", tag: "迎宾 · 外院", quote: "“倒座一般为五开间，东稍间为宅门，明间为迎宾厅”", features: ["外墙高大连续，内檐木雕装饰精美", "两层倒座多见于大宅，设廊檐雕花", "明间作节庆宴客，等级分明"], detail: "内檐墙有木结构装饰，如雕花柱头、木格窗；倒座与大门结合形成第一进院落气势。", svg: "statics/倒座1.png", real: "statics/倒座2.png"},
+        { name: "铺地 & 花栏", tag: "地坪抬高 · 矮墙", quote: "“院落铺地从大门至正房逐级抬高，花栏为砖砌镂空矮墙”", features: ["方砖平铺或斜铺，台阶处变换砌法", "排水口下方设矩形石块防蚀", "花栏位于倒座或正房前，增添园林意趣"], detail: "院落铺地一般为方砖平铺或斜铺，台阶收头处砌法不同；正房排水口下方及正房、厢房、倒座门前的铺地用矩形石块代替（石比砖坚固，可减少磨损、防雨水腐蚀）；院落地坪从大门到正房不断抬高（通过坡道或台阶实现），多级台阶处铺地砌筑方式随高差变化。民居院内多满铺地砖、少种花草，常在靠近倒座或正房的位置设花栏；花栏是砖砌矮墙，墙身用砖镂空砌出不同图案。房、厢房前常用矩形石砖铺地，坚固耐磨。地坪逐渐升高，象征步步高升。", svg:"statics/铺地&花栏1.png", real: "statics/铺地&花栏2.png" },
+        { name: "中门 · 垂花门", tag: "内外之界", quote: "“垂花门双屋顶，内侧屏门，两侧出入，婚丧大事方开”", features: ["空间分隔，增加院落层次", "莲花吊柱不落地，雕刻繁复", "等级象征，显示屋主财力"], detail: "为分隔多进院落、增加空间层次，常在轴线上设中门，兼具空间分隔与财富象征意义，精细程度体现屋主权力地位。中门一般做成垂花门形制，每道垂花门设两层门扇）；屏门平时不开，仅遇红白喜事或重要客人来访时打开。垂花门多为双屋顶、内侧长外侧短的不对称结构；内侧屏门两边柱子落地，外侧柱子常做莲花吊柱；也有砖砌垂花门感。", svg: "statics/中门1.png", real: "statics/中门2.png" },
+        { name: "厢房", tag: "居所 · 东高西低", quote: "“厢房三开间“三破二”，东厢房高于西厢房”", features: ["每间一窗一门，火炕占室内大面积", "内厢房主人卧室，外厢房佣人/储藏", "前檐出檐1~1.5米，砖木结构"], detail: "民居厢房多为居住空间，平遥民居厢房常呈“三开间”的“三破二”形式（正中筑隔墙将三间分为两间，各设对外门窗），因居住功能一般设置火炕（火炕靠窗）；结构上，厢房多为砖木结构，装饰集中于门窗与枋头，前檐墙出檐较小，后檐墙为院墙，等级较高的院落厢房会做成锢窑形制并设单坡廊檐；布局上，东厢房一般比西厢房高，两进院落的内厢房多为主人卧室，外厢房比内厢房低且平面有进退，用作佣人房或储藏室", svg: "statics/厢房1.png", real: "statics/厢房2.png"},
+        { name: "正房", tag: "尊位 · 祭祀", quote: "“正房窑洞前加木廊檐，屋顶平顶可上人，供奉祖堂”", features: ["平面“一明两暗”或“三明两暗”", "窑洞上方女儿墙做正脊，檐柱下设石柱础", "廊檐雕刻华丽，等级极高者设斗拱"], detail: "平遥民居的正房（含砖木式与锢窑式），平面多为“一明两暗”或“三明两暗”：“明”间是供奉祖先的公共祖堂、香案（不住人），“暗”间为长辈卧室（设火炕，明间不设）；砖木式正房前常设单坡木廊檐（挑檐结合窑洞女儿墙，廊檐柱下置石柱础，高等级宅院廊檐华丽并设斗拱），屋顶为单坡或双坡、层数一至两层；锢窑式正房屋顶平旷可上人，楼梯设于正房两侧或一侧（砖砌固定，下可设储藏室）。", svg: "statics/正房1.png", real: "statics/正房2.png"},
+        { name: "屋顶", tag: "平坡结合 · 吉位", quote: "“屋顶设风水影壁与神龛，位于吉方，祈家族昌盛”", features: ["平屋顶与坡顶共存，窑洞覆土缓砖", "正房屋顶正中设影壁，若朝向偏差则偏置", "神龛、吻兽丰富屋顶轮廓"], detail: "平遥屋顶连绵灰色，风水影壁与正脊兽相呼应，兼具精神象征与装饰，体现天人合一理念。",svg: "statics/屋顶1.png", real: "statics/屋顶2.png" },
+        { name: "门窗", tag: "木·砖·石 · 意蕴", quote: "“木雕蝙蝠（福）、砖雕吻兽、石雕柱础，吉祥寓意”", features: ["门窗多层，糊纸保温且私密，可拆卸", "正房拱券高窗，厢房“三破二”门窗形制", "雕刻主题：福、禄、寿，戏剧故事等"], detail: "平遥民居门窗注重密实性（糊纸兼顾保温、私密与装饰），形制与等级功能相关。正房门窗分上下：锢窑下部为三层四扇槛窗（外层可拆卸、中层固定、内层可启闭）；上部为拱形高窗，内外分层，外层固定、内层可开。厢房门窗每间“一门一窗”，窗为四层槛窗（外层可拆卸、内层可启闭，中层木棂装饰）；门为单开门，上部双层高窗，下部双扇内开门。门窗上部多齐平木额枋，整体组合灵活，兼顾通风、采光与立面秩序。", svg: "statics/门窗1.jpeg", real: "statics/门窗2.png"},
+        {name: "雕刻 · 三雕艺术",tag: "木石砖雕 · 吉祥寓意",quote: "“三雕融于建筑，一纹一饰皆藏福”", features: [ "木雕：梁头、挂落、门窗、垂花门，工艺精巧","砖雕：影壁、正脊、吻兽、楼梯扶手，纹样丰富","石雕：柱础、上马石、抱鼓石，造型威严"],detail: "平遥民居雕刻按材料分木雕、砖雕、石雕三类，且都被赋予丰富吉祥寓意。木雕见于正房木廊檐的枋上装饰、枋头、挂落雕花及梁头、门窗雕刻；砖雕分布于屋顶正脊、垂脊吻兽，烟囱顶帽，滴水、瓦顶及照壁装饰；石雕体现在柱础、抱鼓石、石狮子的雕刻。主题上，蝙蝠雕刻取“蝠”与“福”同音表福气，梁头露明处刻吉祥字，门窗枋头多荷叶状木雕，部分荷叶内还雕有故事情节。",svg: "statics/雕刻1.png",real: "statics/雕刻2.png"}
+];
+
+    const modal = document.getElementById('detailModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDetail = document.getElementById('modalDetail');
+
+  function renderCards() {
+    const container = document.getElementById('cardGrid');
+    container.innerHTML = cardsData.map((card, idx) => `
+        <div class="card" onclick="openModal(${idx})">
+            <div class="card-header">
+                <h2>${card.name}</h2>
+                <span class="module-number">${card.tag}</span>
+            </div>
+            <div class="diagram">
+                <div class="img-switch" data-index="${idx}" onclick="toggleImage(event, this)">
+                    <div class="img-svg">
+                        ${card.svg.startsWith('<svg') ? 
+                            card.svg : 
+                            `<img src="${card.svg}" alt="${card.name}线图" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDIwMCAxNTAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmMGYwZjAiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1zaXplPSIxNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgZmlsbD0iIzk5OSI+5Zu+54mH5Yqg5byLPC90ZXh0Pjwvc3ZnPg=='">`}
+                    </div>
+                    ${card.real && card.real !== '#' ? 
+                        `<img class="img-real" src="${card.real}" alt="${card.name}实景" onerror="this.parentElement.classList.remove('active');this.style.display='none';">` : 
+                        ''}
+                </div>
+            </div>
+            <div class="img-tip">点击图片切换：线框图 / 实景图</div>
+            <div class="content">
+                <div class="quote">${card.quote}</div>
+                <ul class="feature-list">
+                    ${card.features.map(f => `<li>${f}</li>`).join('')}
+                </ul>
+            </div>
+            <div class="card-action-btn">
+                <i class="fas fa-archway"></i> 探索更多细节
+                <i class="fas fa-chevron-right" style="font-size: 10px;"></i>
+            </div>
+        </div>
+    `).join('');
+}
+
+
+    function openModal(index) {
+        const data = cardsData[index];
+        modalTitle.innerText = data.name;
+        modalDetail.innerText = data.detail;
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        modal.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+
+   function toggleImage(e, el) {
+    e.stopPropagation();
+    e.preventDefault();
+    
+    const isActive = el.classList.contains('active');
+    const svgImg = el.querySelector('.img-svg img') || el.querySelector('.img-svg');
+    const realImg = el.querySelector('.img-real');
+    
+    if (!realImg) {
+        console.error('未找到实景图元素');
+        return;
+    }
+    
+    console.log('切换状态:', !isActive, '图片路径:', realImg.src);
+    
+    if (isActive) {
+        // 切换回线框图
+        el.classList.remove('active');
+        if (svgImg) svgImg.style.opacity = 1;
+        if (realImg) realImg.style.opacity = 0;
+    } else {
+        // 切换到实景图
+        el.classList.add('active');
+        if (svgImg) svgImg.style.opacity = 0;
+        if (realImg) realImg.style.opacity = 1;
+        
+        // 确保图片加载
+        if (realImg.complete && realImg.naturalHeight === 0) {
+            console.log('图片可能未加载，重新加载...');
+            const src = realImg.src;
+            realImg.src = '';
+            setTimeout(() => realImg.src = src, 10);
+        }
+    }
+}
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        const btn = document.querySelector('.mobile-menu-btn');
+        if (menu.classList.contains('opacity-0')) {
+            menu.classList.remove('opacity-0', '-translate-y-full');
+            menu.classList.add('opacity-100', 'translate-y-0');
+            btn.classList.add('active');
+        } else {
+            menu.classList.add('opacity-0', '-translate-y-full');
+            menu.classList.remove('opacity-100', 'translate-y-0');
+            btn.classList.remove('active');
+        }
+    }
+
+    window.onload = () => {
+    renderCards();
+    
+    // 预加载实景图片
+    cardsData.forEach(card => {
+        if (card.real && !card.real.startsWith('<')) {
+            const img = new Image();
+            img.src = card.real;
+        }
+    });
+};
+</script>
+</body>
+</html>

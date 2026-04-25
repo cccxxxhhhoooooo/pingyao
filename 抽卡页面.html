@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>平遥古城 · 灵韵抽卡 | 晋商遗珍 · 一卡藏春秋</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        .fas, .fab, .far, .fa-solid, .fa-brands {
+            font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
+        }
+        /* 基础变量 */
+        :root {
+            --brick-red: #8B3A3A;
+            --dark-brick: #6B2828;
+            --grey-blue: #4A5568;
+            --dark-wood: #5C3A1E;
+            --wood: #8B5A2B;
+            --light-wood: #A67C52;
+            --parchment: #F5F0E8;
+            --cream: #E8DFD3;
+            --gold: #D4AF37;
+            --light-gold: #F4E3A8;
+        }
+
+        /* 导航栏专用动画 */
+        @keyframes navSlideIn {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes logoGlow {
+            0%,
+            100% {
+                filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3));
+            }
+            50% {
+                filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.6));
+            }
+        }
+
+        .nav-slide-in {
+            animation: navSlideIn 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+
+        .logo-glow {
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+
+        .nav-link-enhanced {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link-enhanced::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .nav-link-enhanced:hover::before {
+            left: 100%;
+        }
+
+        .nav-link-enhanced::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), var(--light-gold), var(--gold));
+            transition: width 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-radius: 1px;
+        }
+
+        .nav-link-enhanced:hover::after {
+            width: 100%;
+        }
+
+        .nav-elegant {
+            background: linear-gradient(135deg, rgba(214, 128, 90, 0.95) 0%, rgba(160, 101, 52, 0.92) 50%, rgba(185, 118, 55, 0.89) 100%);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(212, 175, 55, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-dropdown {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .nav-dropdown-parent:hover .nav-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mobile-menu-btn {
+            position: relative;
+            width: 30px;
+            height: 30px;
+        }
+
+        .mobile-menu-btn span {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--gold);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn span:nth-child(1) {
+            top: 6px;
+        }
+
+        .mobile-menu-btn span:nth-child(2) {
+            top: 14px;
+        }
+
+        .mobile-menu-btn span:nth-child(3) {
+            top: 22px;
+        }
+
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 14px;
+        }
+
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: 14px;
+        }
+
+        .font-calligraphy {
+            font-family: 'Ma Shan Zheng', cursive !important;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+        }
+
+        .font-serif-sc {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 300;
+        }
+
+        /* ---------- 抽卡页面样式 ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #4a2a1a 0%, #2a1a0c 100%);
+            font-family: 'Ma Shan Zheng', cursive !important;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1200" opacity="0.15"><path fill="none" stroke="%23dbb87c" stroke-width="1.2" d="M150 200 L200 150 L300 160 L350 210 L320 280 L230 290 L170 260 Z M500 300 L580 260 L650 310 L630 400 L550 430 L480 380 Z M100 700 L180 650 L270 690 L260 780 L190 820 L110 770 Z M620 800 L700 760 L750 820 L720 900 L640 920 L580 860 Z"/><circle cx="400" cy="550" r="40" stroke="%23dbb87c" stroke-width="1" fill="none"/><path d="M380 540 L420 540 M400 520 L400 560" stroke="%23dbb87c" stroke-width="1.5"/></svg>');
+            background-repeat: repeat;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            padding-top: 140px;
+        }
+
+        .title-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .title-section h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFE181, #FFD073, #FFB344);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 3px 8px rgba(255, 193, 7, 0.4), 0 1px 2px rgba(0,0,0,0.3);
+            letter-spacing: 6px;
+            font-family: 'Ma Shan Zheng', cursive !important;
+        }
+        .title-section p {
+            color: #f0e2b0;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            margin-top: 8px;
+            border-top: 1px solid rgba(218, 178, 98, 0.6);
+            display: inline-block;
+            padding-top: 8px;
+            font-family: 'Ma Shan Zheng', cursive !important;
+        }
+
+        .draw-area {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0 30px;
+        }
+        .draw-btn {
+            background: radial-gradient(circle at 30% 10%, #f3cd81, #b87c2e);
+            border: none;
+            padding: 16px 42px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            font-family: 'Ma Shan Zheng', cursive !important;
+            color: #2f2416;
+            border-radius: 60px;
+            cursor: pointer;
+            box-shadow: 0 15px 25px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,200,0.6);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: 4px;
+        }
+        .draw-btn i { font-size: 2rem; }
+        .draw-btn:hover {
+            transform: scale(1.02);
+            background: radial-gradient(circle at 30% 10%, #ffe2a4, #cb8b32);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.6);
+        }
+        .draw-btn:active { transform: scale(0.98); }
+
+        .card-showcase {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+            perspective: 1200px;
+        }
+        .grand-card {
+            width: 100%;
+            max-width: 520px;
+            position: relative;
+            transition: transform 0.2s, filter 0.2s;
+            animation: cardFloat 3s infinite ease-in-out;
+            border-radius: 32px;
+            cursor: pointer;
+            height: 600px;
+        }
+        @keyframes cardFloat {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .grand-card[data-rarity="SSR"] {
+            filter: drop-shadow(0 0 20px rgba(255,215,0,0.8)) drop-shadow(0 0 35px rgba(255,200,50,0.5));
+        }
+        .grand-card[data-rarity="SR"] {
+            filter: drop-shadow(0 0 16px rgba(180,130,255,0.7));
+        }
+        .grand-card[data-rarity="S"] {
+            filter: drop-shadow(0 0 12px rgba(64,224,208,0.6));
+        }
+        .grand-card[data-rarity="R"] {
+            filter: drop-shadow(0 0 10px rgba(100,200,100,0.5));
+        }
+
+        .flip-card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            border-radius: 32px;
+        }
+        .grand-card.flipped .flip-card {
+            transform: rotateY(180deg);
+        }
+
+        .front, .back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 32px;
+            overflow: hidden;
+        }
+
+        .front {
+            transform: rotateY(0deg);
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            backdrop-filter: none;
+            box-shadow: none;
+        }
+
+        .img-wrapper {
+            width: 85%;
+            max-width: 400px;
+            position: relative;
+            border-radius: 28px;
+            transition: all 0.3s;
+            margin: 0 auto;
+        }
+        .card-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 28px;
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.5), 0 0 0 2px rgba(230,190,110,0.4);
+            background: #1f1a10;
+        }
+        .img-wrapper::after {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            background: radial-gradient(circle, rgba(255,215,120,0.3) 0%, rgba(255,180,50,0) 80%);
+            border-radius: 36px;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        .flip-tip {
+            position: absolute;
+            bottom: 12px;
+            right: 16px;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            padding: 4px 10px;
+            border-radius: 30px;
+            font-size: 0.65rem;
+            color: #eeddaa;
+            pointer-events: none;
+            z-index: 2;
+            font-family: monospace;
+        }
+
+        .back {
+            transform: rotateY(180deg);
+            background: linear-gradient(160deg, #2b2519, #1e1810);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.7), 0 0 0 2px rgba(230,190,110,0.35) inset;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 28px 22px;
+            text-align: center;
+            overflow: hidden;
+            border: 1px solid rgba(218, 178, 120, 0.25);
+        }
+        .back-content {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            padding-right: 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+        .back .rarity-badge-back {
+            font-size: 1.6rem;
+            font-weight: 900;
+            padding: 6px 22px;
+            border-radius: 60px;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            font-family: 'Ma Shan Zheng', cursive !important;
+        }
+        .back .card-name-back {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #fff3cf;
+            text-shadow: 2px 2px 4px #000;
+            border-bottom: 2px solid rgba(255,215,120,0.5);
+            padding-bottom: 8px;
+            width: 90%;
+            font-family: 'Ma Shan Zheng', cursive !important;
+        }
+        .back .card-desc-back {
+            font-size: 1rem;
+            line-height: 1.85;
+            color: #f8efcf;
+            background: rgba(0,0,0,0.35);
+            padding: 18px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(218, 178, 120, 0.25);
+            width: 100%;
+            flex: 1;
+            text-align: left;
+            white-space: pre-line;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.5);
+            font-family: 'Ma Shan Zheng', cursive !important;
+        }
+        .back .card-icon-back {
+            font-size: 2.2rem;
+            color: #e6c48b;
+            text-shadow: 0 0 10px rgba(230, 196, 139, 0.4);
+        }
+        .back .flip-hint {
+            margin-top: 6px;
+            font-size: 0.75rem;
+            opacity: 0.8;
+            color: #e6d5b3;
+            font-family: 'Ma Shan Zheng', cursive !important;
+        }
+
+        .download-btn {
+            margin-top: 8px;
+            background: linear-gradient(135deg, #ffd700, #ffb347);
+            color: #222;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: all 0.2s;
+            font-family: 'Ma Shan Zheng', cursive !important;
+        }
+        .download-btn:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #ffe169, #ffc163);
+        }
+
+        .collection-progress {
+            background: linear-gradient(135deg, rgba(32, 28, 18, 0.75), rgba(22, 18, 12, 0.8));
+            border-radius: 24px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(218, 178, 120, 0.4);
+            color: #f0e2b0;
+            font-size: 0.95rem;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,215,0,0.1);
+            backdrop-filter: blur(10px);
+            font-family: 'Ma Shan Zheng', cursive !important;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffdf8c;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 10px;
+            background: rgba(28, 22, 12, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(218, 178, 120, 0.3);
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffd966, #ffb347, #ffdf8c);
+            border-radius: 10px;
+            transition: width 0.8s ease;
+            box-shadow: 0 0 10px rgba(255, 217, 102, 0.6);
+        }
+
+        .progress-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .progress-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            background: rgba(0,0,0,0.25);
+            border-radius: 12px;
+            border: 1px solid rgba(218, 178, 120, 0.2);
+        }
+
+        .progress-item b {
+            color: #ffd966;
+            font-weight: 700;
+        }
+
+        .progress-total {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .history-section {
+            background: rgba(0,0,0,0.35);
+            backdrop-filter: blur(10px);
+            border-radius: 42px;
+            padding: 22px 20px;
+            margin-top: 20px;
+            border: 1px solid rgba(210, 170, 80, 0.5);
+        }
+        .history-title {
+            font-size: 1.5rem;
+            color: #eedfa0;
+            border-left: 6px solid #e2b76a;
+            padding-left: 20px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Ma Shan Zheng', cursive !important;
+        }
+        .history-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            max-height: 220px;
+            overflow-y: auto;
+            padding: 8px 4px;
+        }
+        .history-card {
+            background: rgba(32, 26, 16, 0.85);
+            border-radius: 24px;
+            width: 110px;
+            padding: 12px 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(220, 180, 80, 0.4);
+            flex-shrink: 0;
+            font-family: 'Ma Shan Zheng', cursive !important;
+        }
+        .history-card:hover {
+            transform: translateY(-5px);
+            background: rgba(70, 50, 25, 0.9);
+            border-color: #e9bc6d;
+        }
+        .history-rarity {
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 30px;
+            background: #00000066;
+        }
+        .history-name {
+            font-size: 0.85rem;
+            margin-top: 8px;
+            color: #ffe3a4;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .fx-glow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; background: radial-gradient(circle, rgba(255,215,0,0.4) 0%, rgba(255,255,255,0) 80%); animation: flashFade 0.8s ease-out forwards; }
+        @keyframes flashFade { 0% { opacity: 1; transform: scale(1);} 100% { opacity: 0; transform: scale(2);} }
+        .ssr-firework { position: fixed; top: 20%; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 998; background-image: radial-gradient(circle at 20% 30%, gold 1px, transparent 1px); background-size: 40px 40px; animation: sparkle 0.6s linear; }
+        @keyframes sparkle { 0% { opacity: 1; background-position: 0 0;} 100% { opacity: 0; background-position: 100px 100px;} }
+        .ssr-ultimate { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1000; display: flex; justify-content: center; align-items: center; }
+        .ssr-ultimate .golden-burst { width: 100%; height: 100%; background: radial-gradient(circle, rgba(255,200,50,0.6) 0%, rgba(255,100,0,0) 80%); animation: burstPulse 1s ease-out forwards; }
+        @keyframes burstPulse { 0% { transform: scale(0.5); opacity: 1; } 100% { transform: scale(2); opacity: 0; } }
+        .gold-petal { position: fixed; font-size: 1.8rem; pointer-events: none; z-index: 1001; animation: floatUp 1.2s ease-out forwards; }
+        @keyframes floatUp { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(-150px) rotate(360deg); opacity: 0; } }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #2a241a; border-radius: 8px; }
+        ::-webkit-scrollbar-thumb { background: #c9a86b; border-radius: 8px; }
+
+        @media (max-width: 650px) {
+            .grand-card { max-width: 95%; height: 520px; }
+            .back .card-name-back { font-size: 1.4rem; }
+            .back .card-desc-back { font-size: 0.9rem; padding: 14px 12px; }
+            .history-card { width: 85px; }
+            .draw-btn { padding: 12px 28px; font-size: 1.4rem; }
+            .title-section h1 { font-size: 2rem; }
+            .img-wrapper { width: 90%; }
+            .collection-progress { padding: 16px; gap: 10px; }
+            .progress-items { gap: 8px; font-size: 0.85rem; }
+            .container { padding-top: 140px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="fixed inset-0 z-0 bg-black/30 backdrop-blur-[6px]"></div>
+    <canvas id="particles"></canvas>
+
+    <nav class="fixed w-full z-50 nav-elegant nav-slide-in border-b border-[#D4AF37]/20">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 h-24 flex justify-between items-center">
+            <!-- 左侧徽标区域 -->
+            <div class="flex items-center space-x-4 group cursor-pointer">
+                <div class="relative">
+                    <div
+                        class="absolute -inset-3 bg-gradient-to-br from-[#D4AF37]/30 via-[#8B3A3A]/20 to-[#5C3A1E]/20 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-700">
+                    </div>
+                    <div
+                        class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-[#F5F0E8] to-[#E8DFD3] flex items-center justify-center shadow-xl transition-all duration-500 group-hover:scale-105 group-hover:rotate-[3deg] logo-glow overflow-hidden">
+                        <div class="absolute inset-[6px] border-2 border-[#8B3A3A]/40 rounded-lg"></div>
+                        <div class="absolute inset-[10px] border border-[#D4AF37]/50 rounded-sm"></div>
+                        <span
+                            class="font-calligraphy text-4xl text-[#8B3A3A] relative z-10 transition-all duration-300 group-hover:text-[#6B2828]">平</span>
+                        <div class="absolute top-1 left-1 w-4 h-4 border-t-2 border-l-2 border-[#D4AF37]/60"></div>
+                        <div class="absolute bottom-1 right-1 w-4 h-4 border-b-2 border-r-2 border-[#D4AF37]/60"></div>
+                    </div>
+                    <div class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#D4AF37] rounded-full shadow-md"></div>
+                    <div class="absolute -bottom-1 -left-1 w-2.5 h-2.5 bg-[#8B3A3A] rounded-full shadow-md"></div>
+                </div>
+                <div class="flex flex-col">
+                    <span
+                        class="font-calligraphy text-2xl text-[#F5F0E8] font-bold tracking-[0.15em] transition-colors duration-300 group-hover:text-[#D4AF37]">平遥古城</span>
+                    <span class="font-serif-sc text-xs text-[#D4C4B0] tracking-[0.3em] opacity-90 mt-1 uppercase">PINGYAO ANCIENT
+                        CITY</span>
+                    <div
+                        class="w-20 h-0.5 bg-gradient-to-r from-[#D4AF37] to-transparent mt-2 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 桌面端导航菜单 -->
+<div class="hidden lg:flex items-center space-x-1">
+    <div
+        class="flex items-center space-x-1 bg-gradient-to-r from-[#5C3A1E]/20 to-[#8B3A3A]/20 backdrop-blur-sm rounded-2xl px-2 py-2 border border-[#D4AF37]/10">
+        <div class="nav-dropdown-parent relative">
+            <a href="index.html"
+                class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+                <i
+                    class="fas fa-home text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                <span>首页</span>
+            </a>
+        </div>
+        <div class="w-px h-6 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+        <div class="nav-dropdown-parent relative">
+            <a href="探索民居.html"
+                class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+                <i
+                    class="fas fa-building text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                <span>探索民居</span>
+            </a>
+        </div>
+        <div class="w-px h-6 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+        <div class="nav-dropdown-parent relative">
+            <a href="解构建筑.html"
+                class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+                <i
+                    class="fas fa-archway text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                <span>解构建筑</span>
+            </a>
+        </div>
+        <div class="w-px h-6 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+        <a href="营造四因.html"
+            class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+            <i
+                class="fas fa-palette text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+            <span>营造四因</span>
+        </a>
+        <div class="w-px h-6 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+        
+        <!-- 互动体验下拉菜单 -->
+        <div class="nav-dropdown-parent relative">
+            <a href="javascript:void(0)" onclick="toggleDropdown()" 
+               class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group border-b-2 border-[#D4AF37]">
+                <i class="fas fa-theater-masks text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                <span>互动体验</span>
+            </a>
+            <!-- 下拉菜单 -->
+            <div id="dropdownMenu" class="nav-dropdown absolute left-0 mt-2 w-48 bg-[#5C3A1E]/95 backdrop-blur-md rounded-xl shadow-lg border border-[#D4AF37]/20 overflow-hidden z-50 ">
+                <a href="答题页面.html" 
+                   class="block px-4 py-3 text-base font-serif-sc text-[#F5F0E8] hover:bg-[#8B3A3A]/30 hover:text-[#D4AF37] transition">
+                    🧠 答题页面
+                </a>
+                <a href="抽卡页面.html" 
+                   class="block px-4 py-3 text-base font-serif-sc text-[#F5F0E8] hover:bg-[#8B3A3A]/30 hover:text-[#D4AF37] transition">
+                    🎴 抽卡页面
+                </a>
+                <a href="问答页面.html" 
+                   class="block px-4 py-3 text-base font-serif-sc text-[#F5F0E8] hover:bg-[#8B3A3A]/30 hover:text-[#D4AF37] transition">
+                    💬 问答页面
+                </a>
+            </div>
+        </div>
+        
+        <div class="w-px h-6 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+        <a href="知筑践行.html"
+            class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+            <i
+                class="fas fa-shield-alt text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+            <span>知筑践行</span>
+        </a>
+    </div>
+</div>
+
+            <!-- 移动端菜单按钮 -->
+            <div class="lg:hidden">
+                <button class="mobile-menu-btn relative z-50" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 移动端下拉菜单 -->
+        <div id="mobileMenu"
+            class="lg:hidden absolute top-full left-0 w-full bg-gradient-to-b from-[#8B3A3A]/95 to-[#5C3A1E]/95 backdrop-blur-lg shadow-2xl border-b border-[#D4AF37]/20 transform -translate-y-full opacity-0 transition-all duration-300">
+            <div class="px-6 py-8">
+                <div class="space-y-4">
+                    <a href="index.html"
+                        class="flex items-center space-x-3 px-4 py-3 text-[#F5F0E8] hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all duration-200"><i
+                            class="fas fa-home text-lg text-[#D4AF37]"></i><span
+                            class="font-serif-sc text-lg">首页</span></a>
+                    <a href="探索民居.html"
+                        class="flex items-center space-x-3 px-4 py-3 text-[#F5F0E8] hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all duration-200"><i
+                            class="fas fa-building text-lg text-[#D4AF37]"></i><span
+                            class="font-serif-sc text-lg">探索民居</span></a>
+                    <a href="解构建筑.html"
+                        class="flex items-center space-x-3 px-4 py-3 text-[#F5F0E8] hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all duration-200"><i
+                            class="fas fa-archway text-lg text-[#D4AF37]"></i><span
+                            class="font-serif-sc text-lg">解构建筑</span></a>
+                    <a href="营造四因.html"
+                        class="flex items-center space-x-3 px-4 py-3 text-[#F5F0E8] hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all duration-200"><i
+                            class="fas fa-theater-masks text-lg text-[#D4AF37]"></i><span
+                            class="font-serif-sc text-lg">营造艺术</span></a>
+                    <!-- 互动体验（移动端可展开） -->
+                    <div class="relative">
+                        <button onclick="toggleMobileSubmenu()" 
+                            class="w-full flex items-center justify-between px-4 py-3 text-[#F5F0E8] hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all duration-200">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-gamepad text-lg text-[#D4AF37]"></i>
+                                <span class="font-serif-sc text-lg">互动体验</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <div id="mobileSubmenu" class="ml-6 mt-1 hidden space-y-2">
+                            <a href="答题页面.html" 
+                                class="flex items-center space-x-2 px-4 py-2 text-[#F5F0E8] hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all">
+                                🧠 答题页面
+                            </a>
+                            <a href="抽卡页面.html" 
+                                class="flex items-center space-x-2 px-4 py-2 text-[#F5F0E8] hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all">
+                                🎴 抽卡页面
+                            </a>
+                            <a href="问答页面.html" 
+                                class="flex items-center space-x-2 px-4 py-2 text-[#F5F0E8] hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all">
+                                💬 问答页面
+                            </a>
+                        </div>
+                    </div>
+                    <a href="知筑践行.html"
+                        class="flex items-center space-x-3 px-4 py-3 text-[#F5F0E8] hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all duration-200"><i
+                            class="fas fa-shield-alt text-lg text-[#D4AF37]"></i><span
+                            class="font-serif-sc text-lg">知筑践行</span></a>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#D4AF37]/20 via-[#D4AF37] to-[#D4AF37]/20">
+        </div>
+    </nav>
+
+    <!-- 抽卡主内容 -->
+    <div class="container">
+        <div class="title-section">
+            <h1><i class="fas fa-landmark"></i> 平遥古城 · 灵韵抽卡 <i class="fas fa-scroll"></i></h1>
+            <p>「 汇通天下 · 晋风余韵 」 一卡一春秋，拾忆千年城</p>
+        </div>
+
+        <div class="draw-area">
+            <button class="draw-btn" id="drawCardBtn"><i class="fas fa-dice-d6"></i> 祈愿 · 抽卡 <i class="fas fa-star-of-life"></i></button>
+        </div>
+
+        <div class="card-showcase">
+            <div class="grand-card" id="currentCard" data-rarity="SSR">
+                <div class="flip-card">
+                    <div class="front">
+                        <div class="img-wrapper">
+                            <img class="card-img" id="cardFrontImg" src="https://via.placeholder.com/400x300?text=平遥古城" alt="卡牌图片">
+                            <div class="flip-tip"><i class="fas fa-hand-pointer"></i> 点击翻转</div>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div class="back-content">
+                            <div class="rarity-badge-back" id="cardBackRarity">SSR</div>
+                            <div class="card-name-back" id="cardBackName">平遥古城 · 世界遗产</div>
+                            <div class="card-desc-back" id="cardBackDesc">平遥古城，始建于西周宣王时期，中国汉民族地区现存最为完整的古城。1997年列入世界文化遗产。</div>
+                            <div class="card-icon-back" id="cardBackIcon"><i class="fas fa-landmark"></i></div>
+                            <button class="download-btn" id="downloadBtn"><i class="fas fa-download"></i> 保存卡牌到手机</button>
+                            <div class="flip-hint"><i class="fas fa-sync-alt"></i> 点击返回</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="history-section">
+            <div class="history-title">
+                <i class="fas fa-history"></i> 典藏录 · 抽得灵韵
+                <i class="fas fa-feather-alt"></i>
+            </div>
+            <div class="collection-progress" id="collectionProgress">加载中...</div>
+            <div class="history-grid" id="historyGrid">
+                <div class="history-card" style="opacity:0.7;"><div class="history-rarity">✨</div><div class="history-name">抽卡开启</div></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 导航栏功能
+        function toggleMobileMenu() {
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            menuBtn.classList.toggle('active');
+
+            if (mobileMenu.classList.contains('opacity-0')) {
+                mobileMenu.classList.remove('opacity-0', '-translate-y-full');
+                mobileMenu.classList.add('opacity-100', 'translate-y-0');
+            } else {
+                mobileMenu.classList.remove('opacity-100', 'translate-y-0');
+                mobileMenu.classList.add('opacity-0', '-translate-y-full');
+            }
+        }
+
+        // 导航栏滚动效果
+        let lastScroll = 0;
+        const navbar = document.querySelector('nav');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll <= 0) {
+                navbar.style.transform = 'translateY(0)';
+            }
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                navbar.style.transform = 'translateY(-100%)';
+            } else if (currentScroll < lastScroll) {
+                navbar.style.transform = 'translateY(0)';
+            }
+            lastScroll = currentScroll;
+        });
+
+        // 导航链接点击效果
+        const navLinks = document.querySelectorAll('.nav-link-enhanced');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => { this.style.transform = ''; }, 150);
+                const mobileMenu = document.getElementById('mobileMenu');
+                const menuBtn = document.querySelector('.mobile-menu-btn');
+                if (!mobileMenu.classList.contains('opacity-0')) {
+                    menuBtn.classList.remove('active');
+                    mobileMenu.classList.remove('opacity-100', 'translate-y-0');
+                    mobileMenu.classList.add('opacity-0', '-translate-y-full');
+                }
+            });
+        });
+
+    
+
+        // 粒子背景
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let w = canvas.width = window.innerWidth;
+        let h = canvas.height = window.innerHeight;
+        const particlesArray = [];
+        const particleCount = Math.floor(w / 6);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * w;
+                this.y = Math.random() * h;
+                this.size = Math.random() * 2.2 + 0.6;
+                this.speedX = Math.random() * 0.3 - 0.15;
+                this.speedY = Math.random() * 0.3 - 0.15;
+                this.color = `rgba(235, 200, 140, ${Math.random() * 0.6 + 0.25})`;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0) this.x = w;
+                if (this.x > w) this.x = 0;
+                if (this.y < 0) this.y = h;
+                if (this.y > h) this.y = 0;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particlesArray.length = 0;
+            for (let i = 0; i < particleCount; i++) particlesArray.push(new Particle());
+        }
+        function animateParticles() {
+            ctx.clearRect(0, 0, w, h);
+            particlesArray.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animateParticles);
+        }
+        window.addEventListener('resize', () => {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+            initParticles();
+        });
+        initParticles();
+        animateParticles();
+
+        // 抽卡逻辑
+        const cardsDB = [
+            { name: "日昇昌 · 汇通天下", rarity: "SSR", desc: "中国第一家票号，开创晋商金融帝国。楹联：「日丽中天万宝精华同耀彩，昇临福地八方辐辏独居奇。」天下财源，始于此矣。\n「一纸票据通天下，百年信义立晋商。」\n坐落于平遥古城西大街，被誉为“天下第一票号”。", icon: "fas fa-coins", imgUrl: "卡牌/日昇昌.png" },
+            { name: "平遥城墙 · 龟城永固", rarity: "SSR", desc: "西周始建，明代扩建，六道城门，三千垛口。古语云：「城垣壮丽三千垛，雉堞巍峨七十二」。世界遗产之脊梁。\n「龟城千载锁烟云，铁壁铜墙护万民。」", icon: "fas fa-fort-awesome", imgUrl: "卡牌/平遥古城.png" },
+            { name: "马家大院 · 晋商豪宅", rarity: "SSR", desc: "清代巨商马中选故居，平遥古城内规模最大的晋商宅院。院落俯瞰呈「马」字形，砖雕、木雕、石雕精美绝伦。\n「马字宅院藏龙虎，三雕绝艺冠三晋。」", icon: "fas fa-building", imgUrl: "卡牌/马家大院.jpg" },
+            { name: "平遥县衙 · 亲民堂", rarity: "SR", desc: "中国保存最完整县衙，楹联警世：「吃百姓之饭，穿百姓之衣，莫道百姓可欺，自己也是百姓。」古时法治缩影。", icon: "fas fa-gavel", imgUrl: "卡牌/平遥县衙.png" },
+            { name: "娘家醋坊 · 古法老醋", rarity: "SR", desc: "平遥古城知名醋坊，前店后坊，沿用蒸、酵、熏、淋、陈古法酿制山西老陈醋。醋香醇厚，酸中带甜。", icon: "fas fa-flask", imgUrl: "卡牌/娘家醋坊.jpg" },
+            { name: "蔚盛长票号 · 晋商银庄", rarity: "SR", desc: "平遥古城南大街，原为绸缎庄后改票号，蔚字五联号之一。前店后居，柜房办理汇兑存放。", icon: "fas fa-coins", imgUrl: "卡牌/蔚盛长.png" },
+            { name: "华北第一镖局", rarity: "SR", desc: "清代镖局文化代表，走镖江湖，忠信仁义。旧言：「仁义镖行天下路，武艺安邦护客商。」", icon: "fas fa-shield-alt", imgUrl: "卡牌/华北第一镖局.png" },
+            { name: "市楼 · 金井古楼", rarity: "S", desc: "古城心脏，登楼可瞰全城，诗句：「朝晨午夕街三市，贺凤桥台井上楼。」市井烟火，千年不息。", icon: "fas fa-city", imgUrl: "卡牌/市楼.png" },
+            { name: "推光漆器 · 流光溢彩", rarity: "S", desc: "国家级非遗，手掌推光，描金彩绘。诗句：「漆器生辉映日月，描金彩绘醉春风。」匠心独运。", icon: "fas fa-hand-sparkles", imgUrl: "卡牌/推光漆器.png" },
+            { name: "平遥牛肉 · 香飘三晋", rarity: "S", desc: "清代贡品，传统腌制，肉质鲜嫩。民谣：「平遥牛肉香万里，老幼皆宜赞不绝。」", icon: "fas fa-utensils", imgUrl: "卡牌/平遥牛肉.png" },
+            { name: "古民居· 砖雕影壁", rarity: "S", desc: "深宅大院，晋商故居，砖雕、木雕、石雕精美。楹联：「积善之家必有余庆，资富能训惟以永年。」", icon: "fas fa-home", imgUrl: "卡牌/古民居.jpg" },
+            { name: "协同庆 · 地下金库", rarity: "S", desc: "协同庆票号地下金库，平遥规模最大，藏银无数。晋商金融胆识的巅峰见证。", icon: "fas fa-vault", imgUrl: "卡牌/协同庆地下金库.png" },
+            { name: "长升源黄酒", rarity: "R", desc: "明清老字号，慈禧西逃曾饮，赞「长升源黄酒，香醇似醴泉。」", icon: "fas fa-wine-bottle", imgUrl: "卡牌/长升源黄酒.png" },
+            { name: "平遥剪纸 · 窗花遗韵", rarity: "R", desc: "民间艺术，刀剪春秋，图必有意，意必吉祥。故事：一纸乾坤，福禄寿喜。", icon: "fas fa-cut", imgUrl: "卡牌/平遥剪纸.png" },
+            { name: "纱阁戏人 · 傀儡风华", rarity: "R", desc: "清代独创，纱阁中戏曲人物，栩栩如生，展现晋剧风华。", icon: "fas fa-mask", imgUrl: "卡牌/纱阁戏人.png" },
+            { name: "平遥碗托 · 街头至味", rarity: "R", desc: "荞面碗托，冷热皆宜。民谣：「碗托滑嫩酸辣香，平遥游子思故乡。」", icon: "fas fa-egg", imgUrl: "卡牌/平遥碗托.png" },
+            { name: "平遥布鞋 · 千层底", rarity: "R", desc: "传统手工布鞋，纳底千层，轻便耐穿。民谣：「千针万线纳底牢，平遥布鞋走天下。」", icon: "fas fa-shoe-prints", imgUrl: "卡牌/平遥布鞋.png" },
+            { name: "平遥脸谱 · 晋剧风华", rarity: "R", desc: "晋剧脸谱，色彩浓烈，忠奸分明。民谣：「红忠紫孝，黑正粉老。」", icon: "fas fa-mask", imgUrl: "卡牌/平遥脸谱.png" }
+        ];
+
+        const totalStats = { total: cardsDB.length, SSR: cardsDB.filter(c => c.rarity === "SSR").length, SR: cardsDB.filter(c => c.rarity === "SR").length, S: cardsDB.filter(c => c.rarity === "S").length, R: cardsDB.filter(c => c.rarity === "R").length };
+        const grouped = { SSR: cardsDB.filter(c => c.rarity === "SSR"), SR: cardsDB.filter(c => c.rarity === "SR"), S: cardsDB.filter(c => c.rarity === "S"), R: cardsDB.filter(c => c.rarity === "R") };
+        const rarityWeights = [{ rarity: "SSR", weight: 6, pool: grouped.SSR },{ rarity: "SR", weight: 20, pool: grouped.SR },{ rarity: "S", weight: 34, pool: grouped.S },{ rarity: "R", weight: 40, pool: grouped.R }];
+        const totalWeight = rarityWeights.reduce((sum, cur) => sum + cur.weight, 0);
+        function drawRandomCard() {
+            let rand = Math.random() * totalWeight, accum = 0, selectedPool = [];
+            for (let item of rarityWeights) { accum += item.weight; if (rand <= accum) { selectedPool = item.pool; break; } }
+            if (!selectedPool.length) selectedPool = grouped.R;
+            const randomIndex = Math.floor(Math.random() * selectedPool.length);
+            return { ...selectedPool[randomIndex] };
+        }
+
+        const currentCardOuter = document.getElementById("currentCard");
+        const cardFrontImg = document.getElementById("cardFrontImg");
+        const cardBackRarity = document.getElementById("cardBackRarity");
+        const cardBackName = document.getElementById("cardBackName");
+        const cardBackDesc = document.getElementById("cardBackDesc");
+        const cardBackIcon = document.getElementById("cardBackIcon");
+        const historyGrid = document.getElementById("historyGrid");
+        const drawBtn = document.getElementById("drawCardBtn");
+        const collectionProgress = document.getElementById("collectionProgress");
+        const downloadBtn = document.getElementById("downloadBtn");
+
+        let historyList = [], isDrawing = false, isFlippingLock = false, currentCardForDownload = null;
+        const MAX_HISTORY = 12;
+
+        function updateCollectionProgress() {
+            const collectedNames = new Set(historyList.map(c => c.name));
+            const collected = collectedNames.size;
+            const percent = Math.round((collected / totalStats.total) * 100);
+            const ssrCollected = historyList.filter(c => c.rarity === "SSR").length;
+            const srCollected = historyList.filter(c => c.rarity === "SR").length;
+            const sCollected = historyList.filter(c => c.rarity === "S").length;
+            const rCollected = historyList.filter(c => c.rarity === "R").length;
+            collectionProgress.innerHTML = `<div class="progress-header"><span>📜 典藏收集进度</span><span class="progress-total">${collected}/${totalStats.total} (${percent}%)</span></div><div class="progress-bar-bg"><div class="progress-bar-fill" style="width: ${percent}%"></div></div><div class="progress-items"><span class="progress-item">SSR：<b>${ssrCollected}/${totalStats.SSR}</b></span><span class="progress-item">SR：<b>${srCollected}/${totalStats.SR}</b></span><span class="progress-item">S：<b>${sCollected}/${totalStats.S}</b></span><span class="progress-item">R：<b>${rCollected}/${totalStats.R}</b></span></div>`;
+        }
+
+        function downloadCardImage() { if(currentCardForDownload && currentCardForDownload.imgUrl) { const link = document.createElement("a"); link.href = currentCardForDownload.imgUrl; link.download = `平遥灵韵-${currentCardForDownload.name}.png`; document.body.appendChild(link); link.click(); document.body.removeChild(link); alert("卡牌已开始下载！"); } else alert("暂无图片"); }
+
+        function updateGrandCard(card) {
+            currentCardForDownload = card;
+            currentCardOuter.classList.remove("flipped");
+            currentCardOuter.setAttribute("data-rarity", card.rarity);
+            cardFrontImg.src = card.imgUrl && card.imgUrl.trim() !== "" ? card.imgUrl : "https://via.placeholder.com/400x300?text="+encodeURIComponent(card.name);
+            cardFrontImg.onerror = () => { cardFrontImg.src = "https://via.placeholder.com/400x300?text="+encodeURIComponent(card.name); };
+            cardBackRarity.innerText = card.rarity;
+            if (card.rarity === "SSR") cardBackRarity.style.background = "linear-gradient(135deg, #ffd966, #b87c2e)";
+            else if (card.rarity === "SR") cardBackRarity.style.background = "linear-gradient(135deg, #b77eff, #6a3e9a)";
+            else if (card.rarity === "S") cardBackRarity.style.background = "linear-gradient(135deg, #48d1cc, #2c7a6e)";
+            else cardBackRarity.style.background = "linear-gradient(135deg, #7cb87c, #3b6e3b)";
+            cardBackName.innerText = card.name;
+            cardBackDesc.innerText = card.desc;
+            cardBackIcon.innerHTML = card.icon ? `<i class="${card.icon}"></i>` : `<i class="fas fa-scroll"></i>`;
+        }
+
+        function toggleFlip() { if (!isFlippingLock) { isFlippingLock = true; currentCardOuter.classList.toggle("flipped"); setTimeout(() => { isFlippingLock = false; }, 600); } }
+
+        function playRarityEffect(rarity) {
+            if (rarity === "SSR") {
+                const fxDiv = document.createElement("div"); fxDiv.className = "fx-glow"; document.body.appendChild(fxDiv);
+                const fireDiv = document.createElement("div"); fireDiv.className = "ssr-firework"; document.body.appendChild(fireDiv);
+                setTimeout(() => { fxDiv.remove(); fireDiv.remove(); }, 800);
+                for (let i=0;i<16;i++) { const star = document.createElement("div"); star.innerHTML = "✦"; star.style.cssText = `position:fixed; left:${Math.random()*100}%; top:${Math.random()*80}%; font-size:${Math.random()*22+14}px; color:#ffd966; pointer-events:none; z-index:1000; opacity:0.9; animation:sparkle 0.9s ease-out forwards;`; document.body.appendChild(star); setTimeout(() => star.remove(), 900); }
+            } else if (rarity === "SR") { const flash = document.createElement("div"); flash.style.cssText = "position:fixed; inset:0; background:radial-gradient(circle, rgba(180,130,255,0.4) 0%, transparent 80%); pointer-events:none; z-index:998;"; document.body.appendChild(flash); setTimeout(() => flash.remove(), 500); }
+            else if (rarity === "S") { const flash = document.createElement("div"); flash.style.cssText = "position:fixed; inset:0; background:radial-gradient(circle, rgba(64,224,208,0.25), transparent); pointer-events:none; z-index:998;"; document.body.appendChild(flash); setTimeout(() => flash.remove(), 400); }
+            else { const flash = document.createElement("div"); flash.style.cssText = "position:fixed; inset:0; background:radial-gradient(circle, rgba(100,200,100,0.2), transparent); pointer-events:none; z-index:998;"; document.body.appendChild(flash); setTimeout(() => flash.remove(), 300); }
+        }
+        function playSSRUltimateEffect() {
+            const ultimateDiv = document.createElement("div"); ultimateDiv.className = "ssr-ultimate";
+            ultimateDiv.innerHTML = '<div class="golden-burst"></div>'; document.body.appendChild(ultimateDiv);
+            setTimeout(() => ultimateDiv.remove(), 1000);
+            const symbols = ["💰", "🪙", "✨", "🏦", "📜", "⭐"];
+            for (let i = 0; i < 36; i++) { const petal = document.createElement("div"); petal.className = "gold-petal"; petal.innerHTML = symbols[Math.floor(Math.random() * symbols.length)]; petal.style.left = Math.random() * 100 + "%"; petal.style.top = Math.random() * 100 + "%"; petal.style.fontSize = (Math.random() * 24 + 18) + "px"; document.body.appendChild(petal); setTimeout(() => petal.remove(), 1200); }
+            const strongFlash = document.createElement("div"); strongFlash.style.cssText = "position:fixed; inset:0; background-color:rgba(255,215,0,0.35); pointer-events:none; z-index:999; animation:flashFade 0.6s forwards;"; document.body.appendChild(strongFlash); setTimeout(() => strongFlash.remove(), 600);
+        }
+
+        function addHistoryRecord(card) { if (!historyList.some(existing => existing.name === card.name)) { historyList.unshift(card); if (historyList.length > MAX_HISTORY) historyList.pop(); } updateCollectionProgress(); renderHistory(); }
+        function renderHistory() {
+            historyGrid.innerHTML = "";
+            if (historyList.length === 0) { const emptyDiv = document.createElement("div"); emptyDiv.innerText = "✨ 暂无抽卡记录，轻触「祈愿」开启缘分 ✨"; emptyDiv.style.cssText = "color:#d8c99e; padding:10px; width:100%; text-align:center;"; historyGrid.appendChild(emptyDiv); return; }
+            historyList.forEach((card) => { const cardDiv = document.createElement("div"); cardDiv.className = "history-card"; let borderColor = "#b87c2e"; if (card.rarity === "SSR") borderColor = "#ffd966"; else if (card.rarity === "SR") borderColor = "#b77eff"; else if (card.rarity === "S") borderColor = "#48d1cc"; else borderColor = "#7cb87c"; cardDiv.style.borderLeft = `4px solid ${borderColor}`; cardDiv.innerHTML = `<div class="history-rarity" style="background:${borderColor}40; color:#FFE6B0;">${card.rarity}</div><div class="history-name">${card.name.length > 9 ? card.name.slice(0,8)+"…" : card.name}</div>`; cardDiv.addEventListener("click", () => { updateGrandCard(card); playRarityEffect(card.rarity); }); historyGrid.appendChild(cardDiv); });
+        }
+
+        async function performDraw() {
+            if (isDrawing) return;
+            isDrawing = true;
+            drawBtn.disabled = true;
+            drawBtn.style.opacity = "0.7";
+            const newCard = drawRandomCard();
+            playRarityEffect(newCard.rarity);
+            if (newCard.rarity === "SSR") playSSRUltimateEffect();
+            currentCardOuter.style.transition = "transform 0.2s";
+            currentCardOuter.style.transform = "scale(0.96)";
+            setTimeout(() => { currentCardOuter.style.transform = "scale(1)"; }, 120);
+            setTimeout(() => { updateGrandCard(newCard); addHistoryRecord(newCard); isDrawing = false; drawBtn.disabled = false; drawBtn.style.opacity = "1"; }, 200);
+        }
+
+        function initDefaultCard() { const defaultCard = { name: "平遥古城 · 世界遗产", rarity: "SSR", desc: "平遥古城，始建于西周宣王时期，中国汉民族地区现存最为完整的古城。1997年列入世界文化遗产，一砖一瓦皆历史，一街一巷蕴晋魂。\n「龟城千载，瑞气氤氲」", icon: "fas fa-landmark", imgUrl: "https://via.placeholder.com/400x300?text=平遥古城" }; updateGrandCard(defaultCard); historyList = []; updateCollectionProgress(); renderHistory(); }
+
+        drawBtn.addEventListener("click", performDraw);
+        currentCardOuter.addEventListener("click", toggleFlip);
+        downloadBtn.addEventListener("click", (e) => { e.stopPropagation(); downloadCardImage(); });
+        initDefaultCard();
+
+        setTimeout(() => { const tip = document.createElement("div"); tip.innerText = "⭐ 点击祈愿，抽取平遥灵运；点击卡片，翻转品读典故 ⭐"; tip.style.cssText = "position:fixed; bottom:20px; left:20px; background:rgba(0,0,0,0.6); color:#f7e5b1; padding:8px 18px; border-radius:50px; font-size:0.8rem; z-index:99; backdrop-filter:blur(8px);"; document.body.appendChild(tip); setTimeout(() => tip.remove(), 5000); }, 800);
+        // 移动端子菜单展开/收起
+        function toggleMobileSubmenu() {
+            const submenu = document.getElementById('mobileSubmenu');
+            submenu.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>

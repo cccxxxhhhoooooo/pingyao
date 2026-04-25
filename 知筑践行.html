@@ -1,0 +1,2344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>平遥民居 | 晋风遗韵的传承与探索</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <style>
+        /* 字体定义 */
+        .font-calligraphy {
+            font-family: 'Ma Shan Zheng', cursive !important;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+        }
+
+        .font-serif-sc {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 300;
+        }
+
+        .font-kaiti {
+            font-family: "FZCuYuan-M03S", "STKaiti", serif;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+        }
+
+        /* 颜色变量定义 */
+        :root {
+            --brick-red: #8B3A3A;
+            --dark-brick: #6B2828;
+            --grey-blue: #4A5568;
+            --dark-wood: #5C3A1E;
+            --wood: #8B5A2B;
+            --light-wood: #A67C52;
+            --parchment: #F5F0E8;
+            --cream: #E8DFD3;
+            --gold: #D4AF37;
+            --light-gold: #F4E3A8;
+        }
+
+        body {
+            background: url("statics/背景4.jpeg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+            z-index: 0;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(2px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* 导航栏动画 */
+        @keyframes navSlideIn {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .nav-slide-in {
+            animation: navSlideIn 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+
+        @keyframes logoGlow {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.6));
+            }
+        }
+
+        .logo-glow {
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+
+        /* 导航链接效果 */
+        .nav-link-enhanced {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link-enhanced::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .nav-link-enhanced:hover::before {
+            left: 100%;
+        }
+
+        .nav-link-enhanced::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), var(--light-gold), var(--gold));
+            transition: width 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-radius: 1px;
+        }
+
+        .nav-link-enhanced:hover::after {
+            width: 100%;
+        }
+
+        /* 导航栏样式 */
+        .nav-elegant {
+            background: linear-gradient(135deg, rgba(214, 128, 90, 0.95) 0%, rgba(160, 101, 52, 0.92) 50%, rgba(185, 118, 55, 0.89) 100%);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(212, 175, 55, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        /* 移动端菜单按钮 */
+        .mobile-menu-btn {
+            position: relative;
+            width: 30px;
+            height: 30px;
+        }
+
+        .mobile-menu-btn span {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--gold);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn span:nth-child(1) {
+            top: 6px;
+        }
+
+        .mobile-menu-btn span:nth-child(2) {
+            top: 14px;
+        }
+
+        .mobile-menu-btn span:nth-child(3) {
+            top: 22px;
+        }
+
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 14px;
+        }
+
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: 14px;
+        }
+
+        /* 滚动显示动画 */
+        @keyframes scrollUnroll {
+            0% {
+                transform: scaleX(0) translateY(20px);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 0.3;
+            }
+
+            100% {
+                transform: scaleX(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .scroll-reveal {
+            animation: scrollUnroll 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+            transform-origin: left center;
+        }
+
+        /* 淡入向上动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* 标题装饰效果 */
+        .brush-title {
+            position: relative;
+            display: inline-block;
+            font-family: "Noto Serif SC", serif;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 25px rgba(212, 175, 55, 0.35) !important;
+        }
+
+        .brush-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, transparent 0%, var(--brick-red) 20%, var(--dark-wood) 50%, var(--brick-red) 80%, transparent 100%);
+            border-radius: 3px;
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+        }
+
+        /* 基础样式 */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* 纹理覆盖层 */
+        .texture-overlay {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895-2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895-2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895-2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895-2 2 2z' fill='%235c3a1e' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        /* 滚动捕捉容器 */
+        .snap-container {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        .snap-section {
+            height: 100vh;
+            width: 100%;
+            scroll-snap-align: start;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding-top: 10vh;
+        }
+
+        /* 隐藏滚动条 */
+        .snap-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .snap-container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* 主标题样式 */
+        .main-title-small {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 3.5rem;
+            color: var(--brick-red);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            margin-top: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .main-title-small {
+                font-size: 6rem;
+            }
+        }
+
+        /* 副标题样式 */
+        .sub-title-small {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.25rem;
+            color: var(--grey-blue);
+            letter-spacing: 0.2em;
+            margin-bottom: 0.4rem;
+        }
+
+        @media (min-width: 768px) {
+            .sub-title-small {
+                font-size: 1.25rem;
+            }
+        }
+
+        /* 标题分隔线 */
+        .title-divider {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+        }
+
+        /* 滚动提示动画 */
+        .scroll-hint {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0) translateX(-50%);
+            }
+
+            40% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+
+            60% {
+                transform: translateY(-5px) translateX(-50%);
+            }
+        }
+
+        /* 左中右结构轮播效果 */
+        .carousel-gallery-container {
+            position: relative;
+            width: 100%;
+            max-width: 1400px;
+            height: 600px;
+            margin: 40px auto 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1500px;
+            transform-style: preserve-3d;
+            overflow: visible;
+        }
+
+        /* 卡片基础样式 */
+        .gallery-card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 590px;
+            height: 450px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            transition: all 0.6s ease-in-out;
+            opacity: 0.85;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 25px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            overflow: hidden;
+            transform-style: preserve-3d;
+            will-change: transform, opacity, filter, box-shadow;
+            backface-visibility: hidden;
+            transform-origin: center;
+        }
+
+        /* 中间卡片 */
+        .gallery-card.active {
+            width: 800px;
+            height: 500px;
+            opacity: 1;
+            z-index: 30;
+            transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(212, 175, 55, 0.1);
+            cursor: default;
+            filter: brightness(1);
+            transition: all 0.6s ease-in-out;
+        }
+
+        /* 左侧卡片 */
+        .gallery-card.left {
+            transform: translateX(-140%) translateY(-50%) translateZ(-80px) scale(0.85);
+            opacity: 0.9;
+            z-index: 20;
+            filter: brightness(0.85);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.6s ease-in-out;
+        }
+
+        /* 右侧卡片 */
+        .gallery-card.right {
+            transform: translateX(40%) translateY(-50%) translateZ(-80px) scale(0.85);
+            opacity: 0.9;
+            z-index: 20;
+            filter: brightness(0.85);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.6s ease-in-out;
+        }
+
+        /* 底部卡片 */
+        .gallery-card.bottom {
+            transform: translateX(-50%) translateY(-50%) translateZ(-100px) scale(0.85);
+            opacity: 0.8;
+            z-index: 15;
+            filter: brightness(0.8) blur(0.5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+            transition: all 0.6s ease-in-out;
+        }
+
+        /* 隐藏卡片 */
+        .gallery-card.hidden {
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1;
+            transform: translateX(-50%) translateY(-50%) translateZ(-300px) scale(0.5);
+            pointer-events: none;
+            transition: all 0.6s ease-in-out;
+        }
+
+        /* 卡片标题 */
+        .gallery-card h3 {
+            font-family: "FZCuYuan-M03S", "STKaiti", serif;
+            font-size: 2.4rem;
+            text-align: center;
+            margin-top: 1.3rem;
+            margin-bottom: 1.8rem;
+            width: 100%;
+            color: #c15454;
+            transition: transform 0.5s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: nowrap;
+        }
+
+        .gallery-card h3::before {
+            content: "";
+            font-size: 1.8rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.8;
+            transition: all 0.4s ease;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+            width: 40px;
+            height: 40px;
+        }
+
+        .gallery-card[data-index="0"] h3::before {
+            content: "🏛️";
+            /* 历史价值 - 古典建筑 */
+        }
+
+        .gallery-card[data-index="1"] h3::before {
+            content: "🏗️";
+            /* 建筑价值 - 施工建筑 */
+        }
+
+        .gallery-card[data-index="2"] h3::before {
+            content: "📜";
+            /* 文化价值 - 卷轴 */
+        }
+
+        .gallery-card[data-index="3"] h3::before {
+            content: "🎓";
+            /* 教育价值 - 学位帽 */
+        }
+
+        .gallery-card.active h3::before {
+            opacity: 1;
+            transform: scale(1.1);
+            animation: iconFloat 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
+        }
+
+        @keyframes iconFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) scale(1.1);
+            }
+
+            50% {
+                transform: translateY(-3px) scale(1.1);
+            }
+        }
+
+        .gallery-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            /* 调整到标题下方 */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 2px;
+            background: linear-gradient(90deg,
+                    transparent 0%,
+                    #D4AF37 20%,
+                    #F4E3A8 50%,
+                    #D4AF37 80%,
+                    transparent 100%);
+            border-radius: 1px;
+            box-shadow: 0 1px 3px rgba(212, 175, 55, 0.2);
+            transition: width 0.4s ease;
+        }
+
+        .gallery-card.active h3::after {
+            width: 20%;
+            box-shadow: 0 1px 5px rgba(212, 175, 55, 0.3);
+        }
+
+        .gallery-card.left h3::after,
+        .gallery-card.right h3::after,
+        .gallery-card.bottom h3::after {
+            width: 10%;
+            opacity: 0.7;
+        }
+
+        .gallery-card.active h3 {
+            transform: translateY(0);
+            animation: titleFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes titleFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+
+        /* 主要内容容器 */
+        .gallery-text-container {
+            width: 100%;
+            padding: 0 1.2rem;
+            text-align: left;
+            margin-top: 0.8rem;
+            flex-grow: 1;
+            overflow-y: auto;
+            max-height: 300px;
+            transition: all 0.5s ease;
+            opacity: 0.9;
+            scroll-behavior: smooth;
+        }
+
+        /* 滚动条样式 */
+        .gallery-text-container::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .gallery-text-container::-webkit-scrollbar-track {
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 2px;
+        }
+
+        .gallery-text-container::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.4);
+            border-radius: 2px;
+            transition: background 0.3s ease;
+        }
+
+        .gallery-text-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(212, 175, 55, 0.6);
+        }
+
+        .gallery-card.active .gallery-text-container {
+            opacity: 1;
+            max-height: 320px;
+        }
+
+        /* 正文文字 */
+        .gallery-text-container p {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.3rem;
+            line-height: 2.1;
+            margin-bottom: 1.3rem;
+            color: #252424;
+            text-align: justify;
+            transform: translateY(12px);
+            opacity: 0;
+            animation: enhancedTextReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            will-change: transform, opacity;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes enhancedTextReveal {
+            0% {
+                transform: translateY(12px) rotateX(3deg);
+                opacity: 0;
+                filter: blur(2px);
+            }
+
+            50% {
+                opacity: 0.6;
+                filter: blur(0.5px);
+            }
+
+            100% {
+                transform: translateY(0) rotateX(0);
+                opacity: 1;
+                filter: blur(0);
+            }
+        }
+
+        .gallery-card.active .gallery-text-container p:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .gallery-card.active .gallery-text-container p:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .gallery-card.active .gallery-text-container p:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        /* 文字悬停效果 */
+        .gallery-text-container p:hover {
+            color: #1A202C;
+            transform: translateX(10px) scale(1) !important;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            background: rgba(238, 213, 133, 0.1) !important;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .gallery-text-container p::selection {
+            background-color: rgba(212, 175, 55, 0.3);
+            color: #8B3A3A;
+        }
+
+        .gallery-text-container p strong {
+            color: #B1624B;
+            font-weight: 700;
+            background: linear-gradient(120deg, #FFF0D0 0%, #FFF0D0 40%, transparent 40%);
+            padding: 0 4px;
+            border-radius: 6px;
+        }
+
+        .gallery-text-container p strong:hover {
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 3px 8px rgba(212, 175, 55, 0.3),
+                0 0 0 1px rgba(212, 175, 55, 0.2);
+            background: linear-gradient(135deg,
+                    rgba(244, 227, 168, 1) 0%,
+                    rgba(255, 248, 220, 0.9) 50%,
+                    rgba(244, 227, 168, 1) 100%);
+        }
+
+
+        @keyframes strongGlow {
+
+            0%,
+            100% {
+                box-shadow: 0 1px 3px rgba(212, 175, 55, 0.2),
+                    0 0 0 1px rgba(212, 175, 55, 0.1);
+            }
+
+            50% {
+                box-shadow: 0 2px 6px rgba(212, 175, 55, 0.3),
+                    0 0 0 1px rgba(212, 175, 55, 0.2),
+                    inset 0 0 8px rgba(255, 248, 220, 0.4);
+            }
+        }
+
+        .gallery-text-container p::before {
+            content: "☛";
+            display: inline-block;
+            margin-right: 8px;
+            color: rgba(212, 175, 55, 0.7);
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-text-container p:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+            color: var(--gold);
+            text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+        }
+
+        .gallery-text-container p {
+            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+        }
+
+        /* 图标容器 */
+        .gallery-icon-container {
+            position: absolute;
+            bottom: 1.8rem;
+            right: 1.8rem;
+            opacity: 0.6;
+            transition: all 0.5s ease;
+            transform: scale(0.9) rotate(-5deg);
+        }
+
+        .gallery-card.active .gallery-icon-container {
+            opacity: 0.9;
+            transform: scale(1.1) rotate(10deg) translateX(5px) translateY(-5px);
+            /* 向右倾斜8度并轻微位移 */
+            filter: drop-shadow(0 4px 8px rgba(139, 58, 58, 0.3));
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .gallery-card:not(.active) .gallery-icon-container {
+            transform: scale(0.9) rotate(-5deg);
+            transition: all 0.5s ease;
+        }
+
+        .gallery-card .gallery-icon-container i {
+            font-size: 2.8rem;
+            color: rgba(219, 114, 114, 0.7);
+            transition: all 0.5s ease;
+        }
+
+        .gallery-card.active .gallery-icon-container i {
+            color: rgba(219, 114, 114, 0.9);
+            animation: iconGlow 2s ease-in-out infinite,
+                iconTilt 4s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        @keyframes iconTilt {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(2deg);
+            }
+
+            75% {
+                transform: rotate(-1deg);
+            }
+        }
+
+        @keyframes iconGlow {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 5px rgba(241, 228, 184, 0.3));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 15px rgba(213, 194, 131, 0.6));
+            }
+        }
+
+        .gallery-card.active {
+            padding: 35px 30px;
+        }
+
+        /* 按钮悬停效果 */
+        #prevCard:hover,
+        #nextCard:hover {
+            transform: translateY(-50%) scale(1.15) rotate(5deg);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+            border-color: rgba(248, 231, 177, 0.9);
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .carousel-gallery-container {
+                max-width: 95%;
+                height: 500px;
+            }
+
+            .gallery-card {
+                width: 280px;
+                height: 420px;
+                padding: 20px 15px;
+            }
+
+            .gallery-card.active {
+                width: 320px;
+                height: 480px;
+            }
+
+            .gallery-card h3 {
+                font-size: 1.8rem;
+                margin-top: 1rem;
+                margin-bottom: 1.2rem;
+            }
+
+            .gallery-text-container p {
+                font-size: 1rem;
+                line-height: 1.85;
+            }
+
+            .gallery-text-container {
+                padding: 0 1rem;
+                max-height: 280px;
+            }
+
+            .gallery-card.left {
+                transform: translateX(-120%) translateY(-50%) translateZ(-60px) scale(0.85);
+            }
+
+            .gallery-card.right {
+                transform: translateX(20%) translateY(-50%) translateZ(-60px) scale(0.85);
+            }
+
+            .gallery-card.bottom {
+                transform: translateX(-50%) translateY(-50%) translateZ(-80px) scale(0.85);
+            }
+
+            .gallery-icon-container {
+                bottom: 1.2rem;
+                right: 1.2rem;
+            }
+
+            .gallery-card .gallery-icon-container i {
+                font-size: 2.2rem;
+            }
+
+            .gallery-card h3::before {
+                font-size: 1.6rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .gallery-card h3::after {
+                height: 1.5px;
+                bottom: -6px;
+            }
+
+            .gallery-text-container p strong {
+                padding: 1px 4px;
+                font-size: 0.95em;
+                /* 在移动端稍小一些 */
+            }
+
+            .gallery-card.active .gallery-icon-container {
+                transform: scale(1) rotate(6deg) translateX(3px) translateY(-3px);
+            }
+        }
+
+        /* 滚动条隐藏 */
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* 时间线样式 */
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 24px 32px;
+        }
+
+        .timeline-item.left {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item.right {
+            left: 50%;
+            text-align: left;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            top: 28px;
+            width: 14px;
+            height: 14px;
+            background-color: #C9A227;
+            border-radius: 50%;
+        }
+
+        .timeline-item.left::before {
+            right: -7px;
+        }
+
+        .timeline-item.right::before {
+            left: -7px;
+        }
+
+        .timeline-content {
+            background-color: #FFFEF5;
+            border: 1px solid #E6D8B5;
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        /* 弹窗动画 */
+        #tip-modal-overlay {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        #tip-modal-overlay>div {
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* 主区域样式 */
+        #main3_1 {
+            height: 100vh;
+            width: 100%;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #main3 {
+            height: 100vh;
+            scroll-snap-align: start;
+            position: relative;
+        }
+
+        /* 呼吸动画 */
+        @keyframes breath {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+
+            50% {
+                transform: scale(1.35);
+                opacity: 1;
+            }
+        }
+
+        .animate-breath {
+            animation: breath 2.5s ease-in-out infinite;
+        }
+
+        /* 浮动动画 */
+        @keyframes floatUpDown {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .animate-float {
+            animation: floatUpDown 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            will-change: transform;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
+        .animate-paused {
+            animation-play-state: paused;
+        }
+
+        .hover\:animate-paused:hover {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+
+<body class="antialiased overflow-x-hidden">
+    <!-- 导航栏 -->
+    <nav class="fixed w-full z-50 nav-elegant nav-slide-in border-b border-[#D4AF37]/20">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 h-24 flex justify-between items-center">
+            <!-- 左侧徽标区域 -->
+            <div class="flex items-center space-x-4 group cursor-pointer">
+                <div class="relative">
+                    <div
+                        class="absolute -inset-3 bg-gradient-to-br from-[#D4AF37]/30 via-[#8B3A3A]/20 to-[#5C3A1E]/20 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-700">
+                    </div>
+                    <div
+                        class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-[#F5F0E8] to-[#E8DFD3] flex items-center justify-center shadow-xl transition-all duration-500 group-hover:scale-105 group-hover:rotate-[3deg] logo-glow overflow-hidden">
+                        <div class="absolute inset-[6px] border-2 border-[#8B3A3A]/40 rounded-lg"></div>
+                        <div class="absolute inset-[10px] border border-[#D4AF37]/50 rounded-sm"></div>
+                        <span
+                            class="font-calligraphy text-4xl text-[#8B3A3A] relative z-10 transition-all duration-300 group-hover:text-[#6B2828]">平</span>
+                        <div class="absolute top-1 left-1 w-4 h-4 border-t-2 border-l-2 border-[#D4AF37]/60"></div>
+                        <div class="absolute bottom-1 right-1 w-4 h-4 border-b-2 border-r-2 border-[#D4AF37]/60"></div>
+                    </div>
+                    <div class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#D4AF37] rounded-full shadow-md"></div>
+                    <div class="absolute -bottom-1 -left-1 w-2.5 h-2.5 bg-[#8B3A3A] rounded-full shadow-md"></div>
+                </div>
+                <div class="flex flex-col">
+                    <span
+                        class="font-calligraphy text-2xl text-[#F5F0E8] font-bold tracking-[0.15em] transition-colors duration-300 group-hover:text-[#D4AF37]">平遥古城</span>
+                    <span class="font-serif-sc text-xs text-[#D4C4B0] tracking-[0.3em] opacity-90 mt-1">PINGYAO ANCIENT
+                        CITY</span>
+                    <div
+                        class="w-20 h-0.5 bg-gradient-to-r from-[#D4AF37] to-transparent mt-2 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 桌面端导航菜单 -->
+            <div class="hidden lg:flex items-center space-x-1">
+                <div
+                    class="flex items-center space-x-1 bg-gradient-to-r from-[#5C3A1E]/20 to-[#8B3A3A]/20 backdrop-blur-sm rounded-2xl px-2 py-2 border border-[#D4AF37]/10">
+                    <div class="nav-dropdown-parent relative">
+                        <a href="index.html"
+                            class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+                            <i
+                                class="fas fa-home text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                            <span>首页</span>
+                        </a>
+                    </div>
+                    <div class="w-px h-6 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+                    <div class="nav-dropdown-parent relative">
+                        <a href="探索民居.html"
+                            class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+                            <i
+                                class="fas fa-building text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                            <span>探索民居</span>
+                        </a>
+                    </div>
+                    <div class="w-px h-6 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+                    <div class="nav-dropdown-parent relative">
+                        <a href="解构建筑.html"
+                            class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+                            <i
+                                class="fas fa-archway text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                            <span>解构建筑</span>
+                        </a>
+                    </div>
+                    <div class="w-px h-6 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+                    <a href="营造四因.html"
+                        class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+                        <i class="fas fa-palette text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                        <span>营造四因</span>
+                    </a>
+                    <div class="w-px h-6 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+
+                    <!-- 互动体验下拉菜单 -->
+                    <div class="nav-dropdown-parent relative">
+                        <a href="javascript:void(0)" onclick="toggleDropdown()"
+                            class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+                            <i
+                                class="fas fa-theater-masks text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                            <span>互动体验</span>
+                        </a>
+                        <!-- 下拉菜单 -->
+                        <div id="dropdownMenu"
+                            class="nav-dropdown absolute left-0 mt-2 w-48 bg-[#5C3A1E]/95 backdrop-blur-md rounded-xl shadow-lg border border-[#D4AF37]/20 overflow-hidden z-50 hidden">
+                            <a href="答题页面.html"
+                                class="block px-4 py-3 text-base font-serif-sc text-[#F5F0E8] hover:bg-[#8B3A3A]/30 hover:text-[#D4AF37] transition">
+                                🧠 答题页面
+                            </a>
+                            <a href="抽卡页面.html"
+                                class="block px-4 py-3 text-base font-serif-sc text-[#F5F0E8] hover:bg-[#8B3A3A]/30 hover:text-[#D4AF37] transition">
+                                🎴 抽卡页面
+                            </a>
+                            <a href="问答页面.html"
+                                class="block px-4 py-3 text-base font-serif-sc text-[#F5F0E8] hover:bg-[#8B3A3A]/30 hover:text-[#D4AF37] transition">
+                                💬 问答页面
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="w-px h-6 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+                    <a href="知筑践行.html"
+                        class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group border-b-2 border-[#D4AF37]">
+                        <i
+                            class="fas fa-shield-alt text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                        <span>知筑践行</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 移动端菜单按钮 -->
+            <div class="lg:hidden">
+                <button class="mobile-menu-btn relative z-50" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 移动端下拉菜单 -->
+        <div id="mobileMenu"
+            class="lg:hidden absolute top-full left-0 w-full bg-gradient-to-b from-[#8B3A3A]/95 to-[#5C3A1E]/95 backdrop-blur-lg shadow-2xl border-b border-[#D4AF37]/20 transform -translate-y-full opacity-0 transition-all duration-300">
+            <div class="px-6 py-8">
+                <div class="space-y-4">
+                    <a href="index.html"
+                        class="flex items-center space-x-3 px-4 py-3 text-[#F5F0E8] hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all duration-200"><i
+                            class="fas fa-home text-lg text-[#D4AF37]"></i><span
+                            class="font-serif-sc text-lg">首页</span></a>
+                    <a href="探索民居.html"
+                        class="flex items-center space-x-3 px-4 py-3 text-[#D4AF37] hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all duration-200"><i
+                            class="fas fa-building text-lg text-[#D4AF37]"></i><span
+                            class="font-serif-sc text-lg font-semibold">探索民居</span></a>
+                    <a href="解构建筑.html"
+                        class="flex items-center space-x-3 px-4 py-3 text-[#F5F0E8] hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all duration-200"><i
+                            class="fas fa-archway text-lg text-[#D4AF37]"></i><span
+                            class="font-serif-sc text-lg">解构建筑</span></a>
+                    <a href="营造四因.html"
+                        class="flex items-center space-x-3 px-4 py-3 text-[#F5F0E8] hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all duration-200"><i
+                            class="fas fa-theater-masks text-lg text-[#D4AF37]"></i><span
+                            class="font-serif-sc text-lg">营造四因</span></a>
+                    <a href="答题页面.html"
+                                class="block px-4 py-3 text-base font-serif-sc text-[#F5F0E8] hover:bg-[#8B3A3A]/30 hover:text-[#D4AF37] transition">
+                                🧠 答题页面
+                            </a>
+                            <a href="抽卡页面.html"
+                                class="block px-4 py-3 text-base font-serif-sc text-[#F5F0E8] hover:bg-[#8B3A3A]/30 hover:text-[#D4AF37] transition">
+                                🎴 抽卡页面
+                            </a>
+                            <a href="问答页面.html"
+                                class="block px-4 py-3 text-base font-serif-sc text-[#F5F0E8] hover:bg-[#8B3A3A]/30 hover:text-[#D4AF37] transition">
+                                💬 问答页面
+                            </a>
+                    <a href="知筑践行.html"
+                        class="flex items-center space-x-3 px-4 py-3 text-[#F5F0E8] hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all duration-200"><i
+                            class="fas fa-shield-alt text-lg text-[#D4AF37]"></i><span
+                            class="font-serif-sc text-lg">知筑践行</span></a>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#D4AF37]/20 via-[#D4AF37] to-[#D4AF37]/20">
+        </div>
+    </nav>
+
+    <main class="snap-container">
+        <!-- Main 1: 薪火相传（四大价值） -->
+        <section id="main1" class="snap-section">
+            <h1 class="main-title-small">知筑践行·薪火相传</h1>
+            <p class="sub-title-small">平遥民居的文化基石</p>
+            <div class="title-divider"></div>
+            
+
+            <!-- 左按钮 -->
+            <button id="prevCard" class="absolute top-[60%] -translate-y-1/2 left-4 md:left-8
+               w-14 h-14
+               bg-gradient-to-br from-[#fff6f6] to-[#fff6f6]
+               rounded-full
+               border-4 border-[#fcedbb]/60
+               flex items-center justify-center
+               text-[#818080]
+               shadow-xl
+               hover:scale-110 hover:border-[#fcedbb]/60
+               transition-all duration-300
+               z-30">
+                <i class="fas fa-chevron-left text-lg"></i>
+            </button>
+
+            <!-- 右按钮 -->
+            <button id="nextCard" class="absolute top-[60%] -translate-y-1/2 right-4 md:right-8
+               w-14 h-14
+               bg-gradient-to-br from-[#fff6f6] to-[#fff6f6]
+               rounded-full
+               border-4 border-[#fcedbb]/60
+               flex items-center justify-center
+               text-[#818080]
+               shadow-xl
+               hover:scale-110 hover:border-[#fcedbb]/60
+               transition-all duration-300
+               z-30">
+                <i class="fas fa-chevron-right text-lg"></i>
+            </button>
+
+            <!-- 左中右结构轮播容器 -->
+            <div class="carousel-gallery-container">
+                <!-- 卡片 1：历史价值 -->
+                <div class="gallery-card active" data-index="0">
+                    <h3 class="font-kaiti text-3xl text-[#8B3A3A] mb-6 w-full text-center">
+                        历史价值
+                    </h3>
+
+                    <div class="gallery-text-container w-full px-4 text-left">
+                        <p class="font-serif-sc text-[#4A5568] leading-relaxed text-base mb-4">
+                            平遥民居是<strong>明清时期北方四合院的典型代表</strong>，以其“日”字、“目”字形布局和封闭严密的形制，展现了汉民族中原地区的传统居住理念。
+                        </p>
+
+                        <p class="font-serif-sc text-[#4A5568] leading-relaxed text-base mb-4">
+                            作为平遥古城的重要组成部分，它与古城共同构成了跨越2700多年的高密度文化遗产，为研究古代人居环境与建筑发展提供了珍贵实物，是<strong>“中国古代县城完好原型”</strong>的关键构成。
+                        </p>
+                    </div>
+
+                    <div class="gallery-icon-container absolute bottom-6 right-6">
+                        <i class="fas fa-landmark text-5xl text-[#8B3A3A]/60"></i>
+                    </div>
+                </div>
+
+                <!-- 卡片 2：建筑价值 -->
+                <div class="gallery-card right" data-index="1">
+                    <h3 class="font-kaiti text-3xl text-[#8B3A3A] mb-6 w-full text-center">
+                        建筑价值
+                    </h3>
+
+                    <div class="gallery-text-container w-full px-4 text-left">
+                        <p class="font-serif-sc text-[#4A5568] leading-relaxed text-base mb-4">
+                            平遥民居是<strong>古代建筑技艺的生动载体</strong>，其“日”字、“目”字形布局与高墙封闭形制，<strong>既适应北方寒风气候，又体现工匠高超营造水平</strong>。
+                        </p>
+
+                        <p class="font-serif-sc text-[#4A5568] leading-relaxed text-base mb-4">
+                            作为北方四合院典型代表，它为<strong>研究古代建筑艺术与构造</strong>提供了重要实物样本，彰显出古人<strong>顺应自然、因地制宜</strong>的营造智慧。
+                        </p>
+                    </div>
+
+                    <div class="gallery-icon-container absolute bottom-6 right-6">
+                        <i class="fas fa-torii-gate text-5xl text-[#8B3A3A]/60"></i>
+                    </div>
+                </div>
+
+                <!-- 卡片 3：文化价值 -->
+                <div class="gallery-card bottom" data-index="2">
+                    <h3 class="font-kaiti text-3xl text-[#8B3A3A] mb-6 w-full text-center">
+                        文化价值
+                    </h3>
+
+                    <div class="gallery-text-container w-full px-4 text-left">
+                        <p class="font-serif-sc text-[#4A5568] leading-relaxed text-base mb-4">
+                            平遥民居是<strong>中华传统文化与家族礼制的重要载体</strong>，其建筑布局深刻体现了家族的尊卑秩序与伦理观念，直观反映了<strong>传统社会的价值体系</strong>。
+                        </p>
+
+                        <p class="font-serif-sc text-[#4A5568] leading-relaxed text-base mb-4">
+                            如今，通过<strong>数字化保护与文旅融合</strong>等方式，它正实现创新传承，成为<strong>彰显中华文明独特魅力</strong>的重要元素。
+                        </p>
+                    </div>
+
+                    <div class="gallery-icon-container absolute bottom-6 right-6">
+                        <i class="fas fa-scroll text-5xl text-[#8B3A3A]/60"></i>
+                    </div>
+                </div>
+
+                <!-- 卡片 4：教育价值 -->
+                <div class="gallery-card left" data-index="3">
+                    <h3 class="font-kaiti text-3xl text-[#8B3A3A] mb-6 w-full text-center">
+                        教育价值
+                    </h3>
+
+                    <div class="gallery-text-container w-full px-4 text-left">
+                        <p class="font-serif-sc text-[#4A5568] leading-relaxed text-base mb-4">
+                            平遥民居是<strong>优质的实地教育素材</strong>，
+                            成为平遥研学体系的重要组成部分。
+                        </p>
+
+                        <p class="font-serif-sc text-[#4A5568] leading-relaxed text-base mb-4">
+                            依托古城打造的六大研学板块、20余类课程及30余条研学线路，
+                            民居作为核心研学场景，为学习者提供<strong>可触摸、可观察的实物课堂</strong>。
+                        </p>
+
+                        <p class="font-serif-sc text-[#4A5568] leading-relaxed text-base">
+                            同时，借助Soreal焕真·平遥科技艺术博物馆等数字平台，民居文化与科技相结合，打造沉浸式体验，推动了古城研学活动的高质量发展。
+                        </p>
+                    </div>
+
+                    <div class="gallery-icon-container absolute bottom-6 right-6">
+                        <i class="fas fa-graduation-cap text-5xl text-[#8B3A3A]/60"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-hint">
+                <svg class="w-6 h-6 text-[#8B3A3A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </div>
+        </section>
+
+        <!-- Main 3: 穿梭千年 -->
+        <section id="main3" class="snap-section">
+            <h1 class="main-title-small">知筑践行·穿梭千年</h1>
+            <p class="sub-title-small">深度研学与实地探访指南</p>
+            <div class="title-divider"></div>
+
+            <!-- 竖向滑动容器（景点卡片） -->
+            <div class="relative w-full max-w-[1500px] mx-auto mt-12 h-[540px]">
+
+                <!-- 竖向滚动区域 -->
+                <div class="h-full overflow-y-auto snap-y snap-mandatory
+                        scrollbar-hide px-4 py-2 animate-float hover:animate-paused">
+
+                    <!-- 卡片 1：日昇昌 -->
+                    <div class="flex-shrink-0 w-full h-[460px] snap-center
+            bg-white/40 backdrop-blur-md rounded-[8px] shadow-2xl
+            border border-[#D4AF37]/30 p-8
+            flex items-center space-x-8
+            scroll-reveal mb-6
+            transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(139,58,58,0.3)] 
+            hover:bg-white/90 hover:scale-[1.02] hover:border-[#8B3A3A]/40
+            hover:rounded-[12px]">
+
+                        <!-- 图片容器 -->
+                        <div class="w-[520px] h-[360px] rounded-[5px] overflow-hidden
+                border-2 border-[#8B3A3A]/20
+                flex items-center justify-center
+                transition-all duration-500
+                hover:border-[#8B3A3A]/60 hover:rounded-[8px]
+                group/img">
+                            <img src="statics/日升昌.png" alt="日昇昌票号" class="w-full h-full object-cover
+                   transition-transform duration-700 ease-out
+                   group-hover/img:scale-110 group-hover/img:rotate-[0.5deg]">
+                        </div>
+
+                        <div class="flex-1 flex flex-col justify-center text-left
+                transition-all duration-500
+                group-hover:translate-x-1">
+                            <h3 class="font-kaiti text-[38px] text-[#c15454] mb-4
+                   transition-all duration-500 ease-out
+                   hover:text-[#8B3A3A] hover:tracking-wide
+                   transform hover:scale-[1.02] hover:translate-x-2
+                   cursor-default">
+                                日昇昌
+                            </h3>
+
+                            <div class="space-y-[14px]">
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-75
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">性质：</strong>
+                                    世界第一家票号（古代银行），中国票号博物馆，属于平遥古城景点联票内景点。
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-100
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">位置：</strong>
+                                    平遥古城西大街，俗称“大清金融第一街”的核心位置。
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-150
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">开放时间：</strong><br>
+                                    夏季（4月–10月）：8:00 – 18:00<br>
+                                    冬季（11月–次年3月）：8:00 – 17:30
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-200
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">预约/门票：</strong>
+                                    不单独售票，需购买125 元 / 人平遥古城全价通票（3 天有效，含 22 个核心景点）参观；学生等群体享 65 元优惠票，特定人群免票，现场核验、无需提前预约。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 卡片 2：协同庆 -->
+                    <div class="flex-shrink-0 w-full h-[460px] snap-center
+            bg-white/40 backdrop-blur-md rounded-[8px] shadow-2xl
+            border border-[#D4AF37]/30 p-8
+            flex items-center space-x-8
+            scroll-reveal mb-6
+            transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(139,58,58,0.3)] 
+            hover:bg-white/90 hover:scale-[1.02] hover:border-[#8B3A3A]/40
+            hover:rounded-[12px]">
+
+                        <div class="flex-1 flex flex-col justify-center text-left
+                transition-all duration-500
+                group-hover:translate-x-1">
+                            <h3 class="font-kaiti text-[38px] text-[#c15454] mb-4
+                   transition-all duration-500 ease-out
+                   hover:text-[#8B3A3A] hover:tracking-wide
+                   transform hover:scale-[1.02] hover:translate-x-2
+                   cursor-default">
+                                协同庆
+                            </h3>
+
+                            <div class="space-y-[14px]">
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-75
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">性质：</strong>
+                                    传统钱庄（银号），现作为中国钱庄博物馆对外开放。
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-100
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">位置：</strong>
+                                    平遥古城中段，紧邻县衙附近。
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-150
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">开放时间：</strong><br>
+                                    夏季：8:00 – 18:00<br>
+                                    冬季：8:00 – 17:30
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-200
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">预约/门票：</strong>
+                                    不单独售票，需购买125 元 / 人平遥古城全价通票（3 天有效，含 22 个核心景点）参观；学生等群体享 65 元优惠票，特定人群免票，现场核验、无需提前预约。
+                                </p>
+                            </div>
+                        </div>
+                        <div class="w-[520px] h-[360px] rounded-[5px] overflow-hidden
+                border-2 border-[#8B3A3A]/20
+                flex items-center justify-center
+                transition-all duration-500
+                hover:border-[#8B3A3A]/60 hover:rounded-[8px]
+                group/img">
+                            <img src="statics/协同庆.jpg" alt="协同庆钱庄" class="w-full h-full object-cover
+                   transition-transform duration-700 ease-out
+                   group-hover/img:scale-110 group-hover/img:rotate-[0.5deg]">
+                        </div>
+                    </div>
+
+                    <!-- 卡片 3：马家大院 -->
+                    <div class="flex-shrink-0 w-full h-[460px] snap-center
+            bg-white/40 backdrop-blur-md rounded-[8px] shadow-2xl
+            border border-[#D4AF37]/30 p-8
+            flex items-center space-x-8
+            scroll-reveal mb-6
+            transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(139,58,58,0.3)] 
+            hover:bg-white/90 hover:scale-[1.02] hover:border-[#8B3A3A]/40
+            hover:rounded-[12px]">
+                        <div class="w-[520px] h-[360px] rounded-[5px] overflow-hidden
+                border-2 border-[#8B3A3A]/20
+                flex items-center justify-center
+                transition-all duration-500
+                hover:border-[#8B3A3A]/60 hover:rounded-[8px]
+                group/img">
+                            <img src="statics/马家大院.jpg" alt="马家大院" class="w-full h-full object-cover
+                   transition-transform duration-700 ease-out
+                   group-hover/img:scale-110 group-hover/img:rotate-[0.5deg]">
+                        </div>
+
+                        <div class="flex-1 flex flex-col justify-center text-left
+                transition-all duration-500
+                group-hover:translate-x-1">
+                            <h3 class="font-kaiti text-[38px] text-[#c15454] mb-4
+                   transition-all duration-500 ease-out
+                   hover:text-[#8B3A3A] hover:tracking-wide
+                   transform hover:scale-[1.02] hover:translate-x-2
+                   cursor-default">
+                                马家大院
+                            </h3>
+
+                            <div class="space-y-[14px]">
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-75
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">性质：</strong>
+                                    大型宅院（古民居博物馆），属于平遥古城景点联票内景点。
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-100
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">位置：</strong>
+                                    平遥古城南门（迎熏门）附近。
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-150
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">开放时间：</strong><br>
+                                    夏令时：08:00 – 18:30<br>
+                                    冬令时：08:00 – 17:30
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-200
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">预约/门票：</strong>
+                                    不单独售票，需购买125 元 / 人平遥古城全价通票（3 天有效，含 22 个核心景点）参观；学生等群体享 65 元优惠票，特定人群免票，现场核验、无需提前预约。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 卡片 4：蔚盛长 -->
+                    <div class="flex-shrink-0 w-full h-[460px] snap-center
+            bg-white/40 backdrop-blur-md rounded-[8px] shadow-2xl
+            border border-[#D4AF37]/30 p-8
+            flex items-center space-x-8
+            scroll-reveal mb-6
+            transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(139,58,58,0.3)] 
+            hover:bg-white/90 hover:scale-[1.02] hover:border-[#8B3A3A]/40
+            hover:rounded-[12px]">
+
+                        <div class="flex-1 flex flex-col justify-center text-left
+                transition-all duration-500
+                group-hover:translate-x-1">
+                            <h3 class="font-kaiti text-[38px] text-[#c15454] mb-4
+                   transition-all duration-500 ease-out
+                   hover:text-[#8B3A3A] hover:tracking-wide
+                   transform hover:scale-[1.02] hover:translate-x-2
+                   cursor-default">
+                                蔚盛长
+                            </h3>
+
+                            <div class="space-y-[14px]">
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-75
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">性质：</strong>
+                                    清代平遥“蔚字五联票号”之一，知名晋商票号旧址，见证晚清票号金融历史。
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-100
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">位置：</strong>
+                                    平遥古城南大街13号。
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-150
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">开放时间：</strong><br>
+                                    夏季：8:00 – 18:00<br>
+                                    冬季：8:00 – 17:30
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-200
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">预约/门票：</strong>
+                                    不单独售票，需购买125 元 / 人平遥古城全价通票（3 天有效，含 22 个核心景点）参观；学生等群体享 65 元优惠票，特定人群免票，现场核验、无需提前预约。
+                                </p>
+                            </div>
+                        </div>
+                        <div class="w-[520px] h-[360px] rounded-[5px] overflow-hidden
+                border-2 border-[#8B3A3A]/20
+                flex items-center justify-center
+                transition-all duration-500
+                hover:border-[#8B3A3A]/60 hover:rounded-[8px]
+                group/img">
+                            <img src="statics/蔚盛长.png" alt="蔚盛长票号博物馆" class="w-full h-full object-cover
+                   transition-transform duration-700 ease-out
+                   group-hover/img:scale-110 group-hover/img:rotate-[0.5deg]">
+                        </div>
+                    </div>
+
+                    <!-- 卡片 5：华北第一镖局 -->
+                    <div class="flex-shrink-0 w-full h-[460px] snap-center
+            bg-white/40 backdrop-blur-md rounded-[8px] shadow-2xl
+            border border-[#D4AF37]/30 p-8
+            flex items-center space-x-8
+            scroll-reveal mb-6
+            transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(139,58,58,0.3)] 
+            hover:bg-white/90 hover:scale-[1.02] hover:border-[#8B3A3A]/40
+            hover:rounded-[12px]">
+
+                        <div class="w-[520px] h-[360px] rounded-[5px] overflow-hidden
+                border-2 border-[#8B3A3A]/20
+                flex items-center justify-center
+                transition-all duration-500
+                hover:border-[#8B3A3A]/60 hover:rounded-[8px]
+                group/img">
+                            <img src="statics/华北第一镖局.jpg" alt="华北第一镖局" class="w-full h-full object-cover
+                   transition-transform duration-700 ease-out
+                   group-hover/img:scale-110 group-hover/img:rotate-[0.5deg]">
+                        </div>
+
+                        <div class="flex-1 flex flex-col justify-center text-left
+                transition-all duration-500
+                group-hover:translate-x-1">
+                            <h3 class="font-kaiti text-[38px] text-[#c15454] mb-4
+                   transition-all duration-500 ease-out
+                   hover:text-[#8B3A3A] hover:tracking-wide
+                   transform hover:scale-[1.02] hover:translate-x-2
+                   cursor-default">
+                                华北第一镖局
+                            </h3>
+
+                            <div class="space-y-[14px]">
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-75
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">性质：</strong>
+                                    清代华北地区代表性镖局遗存，专题展示晋商保镖、武术、押运安保文化的博物馆。
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-100
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">位置：</strong>
+                                    平遥古城东大街路南22号。
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-150
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">开放时间：</strong><br>
+                                    夏令时：08:00 – 18:30<br>
+                                    冬令时：08:00 – 17:30
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-200
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">预约/门票：</strong>
+                                    不单独售票，需购买125 元 / 人平遥古城全价通票（3 天有效，含 22 个核心景点）参观；学生等群体享 65 元优惠票，特定人群免票，现场核验、无需提前预约。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 卡片 6：百川通票号旧址 -->
+                    <div class="flex-shrink-0 w-full h-[460px] snap-center
+            bg-white/40 backdrop-blur-md rounded-[8px] shadow-2xl
+            border border-[#D4AF37]/30 p-8
+            flex items-center space-x-8
+            scroll-reveal mb-6
+            transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(139,58,58,0.3)] 
+            hover:bg-white/90 hover:scale-[1.02] hover:border-[#8B3A3A]/40
+            hover:rounded-[12px]">
+
+                        <div class="flex-1 flex flex-col justify-center text-left
+                transition-all duration-500
+                group-hover:translate-x-1">
+                            <h3 class="font-kaiti text-[38px] text-[#c15454] mb-4
+                   transition-all duration-500 ease-out
+                   hover:text-[#8B3A3A] hover:tracking-wide
+                   transform hover:scale-[1.02] hover:translate-x-2
+                   cursor-default">
+                                百川通票号旧址
+                            </h3>
+
+                            <div class="space-y-[14px]">
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-75
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">性质：</strong>
+                                    市级文物保护单位，清代十大票号之一，最早开展对外金融、电汇业务的票号，现为三晋大财东家私博物馆。
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-100
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">位置：</strong>
+                                    平遥古城南大街109号。
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-150
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">开放时间：</strong><br>
+                                    夏季：8:00 – 18:00<br>
+                                    冬季：8:00 – 17:30
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-200
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">预约/门票：</strong>
+                                    不单独售票，需购买125 元 / 人平遥古城全价通票（3 天有效，含 22 个核心景点）参观；学生等群体享 65 元优惠票，特定人群免票，现场核验、无需提前预约。
+                                </p>
+                            </div>
+                        </div>
+                        <div class="w-[520px] h-[360px] rounded-[5px] overflow-hidden
+                border-2 border-[#8B3A3A]/20
+                flex items-center justify-center
+                transition-all duration-500
+                hover:border-[#8B3A3A]/60 hover:rounded-[8px]
+                group/img">
+                            <img src="statics/百川通.jpg" alt="百川通" class="w-full h-full object-cover
+                   transition-transform duration-700 ease-out
+                   group-hover/img:scale-110 group-hover/img:rotate-[0.5deg]">
+                        </div>
+                    </div>
+
+                    <!-- 卡片 7：同兴公镖局 -->
+                    <div class="flex-shrink-0 w-full h-[460px] snap-center
+            bg-white/40 backdrop-blur-md rounded-[8px] shadow-2xl
+            border border-[#D4AF37]/30 p-8
+            flex items-center space-x-8
+            scroll-reveal mb-6
+            transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(139,58,58,0.3)] 
+            hover:bg-white/90 hover:scale-[1.02] hover:border-[#8B3A3A]/40
+            hover:rounded-[12px]">
+
+                        <div class="w-[520px] h-[360px] rounded-[5px] overflow-hidden
+                border-2 border-[#8B3A3A]/20
+                flex items-center justify-center
+                transition-all duration-500
+                hover:border-[#8B3A3A]/60 hover:rounded-[8px]
+                group/img">
+                            <img src="statics/同兴公镖局.jpg" alt="同兴公镖局" class="w-full h-full object-cover
+                   transition-transform duration-700 ease-out
+                   group-hover/img:scale-110 group-hover/img:rotate-[0.5deg]">
+                        </div>
+
+                        <div class="flex-1 flex flex-col justify-center text-left
+                transition-all duration-500
+                group-hover:translate-x-1">
+                            <h3 class="font-kaiti text-[38px] text-[#c15454] mb-4
+                   transition-all duration-500 ease-out
+                   hover:text-[#8B3A3A] hover:tracking-wide
+                   transform hover:scale-[1.02] hover:translate-x-2
+                   cursor-default">
+                                同兴公镖局
+                            </h3>
+
+                            <div class="space-y-[14px]">
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-75
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">性质：</strong>
+                                    清咸丰年间创立的全国知名老牌镖局，国内现存完整清代镖局实物遗存，系统展示镖师制度、传统武术、晋商安防体系。
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-100
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">位置：</strong>
+                                    平遥古城南大街105号。
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-150
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">开放时间：</strong><br>
+                                    夏令时：08:00 – 18:30<br>
+                                    冬令时：08:00 – 17:30
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-200
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">预约/门票：</strong>
+                                    不单独售票，需购买125 元 / 人平遥古城全价通票（3 天有效，含 22 个核心景点）参观；学生等群体享 65 元优惠票，特定人群免票，现场核验、无需提前预约。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 卡片 8：永隆号 -->
+                    <div class="flex-shrink-0 w-full h-[460px] snap-center
+            bg-white/40 backdrop-blur-md rounded-[8px] shadow-2xl
+            border border-[#D4AF37]/30 p-8
+            flex items-center space-x-8
+            scroll-reveal mb-6
+            transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(139,58,58,0.3)] 
+            hover:bg-white/90 hover:scale-[1.02] hover:border-[#8B3A3A]/40
+            hover:rounded-[12px]">
+
+                        <div class="flex-1 flex flex-col justify-center text-left
+                transition-all duration-500
+                group-hover:translate-x-1">
+                            <h3 class="font-kaiti text-[38px] text-[#c15454] mb-4
+                   transition-all duration-500 ease-out
+                   hover:text-[#8B3A3A] hover:tracking-wide
+                   transform hover:scale-[1.02] hover:translate-x-2
+                   cursor-default">
+                                永隆号
+                            </h3>
+
+                            <div class="space-y-[14px]">
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-75
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">性质：</strong>
+                                    国家级非物质文化遗产平遥推光漆器传承展示基地，平遥知名老字号漆艺博览馆。
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-100
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">位置：</strong>
+                                    平遥古城南大街（市楼附近）。
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-150
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">开放时间：</strong><br>
+                                    夏季：8:00 – 18:00<br>
+                                    冬季：8:00 – 17:30
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-200
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">预约/门票：</strong>
+                                    不单独售票，需购买125 元 / 人平遥古城全价通票（3 天有效，含 22 个核心景点）参观；学生等群体享 65 元优惠票，特定人群免票，现场核验、无需提前预约。
+                                </p>
+                            </div>
+                        </div>
+                        <div class="w-[520px] h-[360px] rounded-[5px] overflow-hidden
+                border-2 border-[#8B3A3A]/20
+                flex items-center justify-center
+                transition-all duration-500
+                hover:border-[#8B3A3A]/60 hover:rounded-[8px]
+                group/img">
+                            <img src="statics/永隆号.png" alt="永隆号" class="w-full h-full object-cover
+                   transition-transform duration-700 ease-out
+                   group-hover/img:scale-110 group-hover/img:rotate-[0.5deg]">
+                        </div>
+                    </div>
+
+                    <!-- 卡片 9：雷履泰故居 -->
+                    <div class="flex-shrink-0 w-full h-[460px] snap-center
+            bg-white/40 backdrop-blur-md rounded-[8px] shadow-2xl
+            border border-[#D4AF37]/30 p-8
+            flex items-center space-x-8
+            scroll-reveal mb-6
+            transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(139,58,58,0.3)] 
+            hover:bg-white/90 hover:scale-[1.02] hover:border-[#8B3A3A]/40
+            hover:rounded-[12px]">
+
+                        <div class="w-[520px] h-[360px] rounded-[5px] overflow-hidden
+                border-2 border-[#8B3A3A]/20
+                flex items-center justify-center
+                transition-all duration-500
+                hover:border-[#8B3A3A]/60 hover:rounded-[8px]
+                group/img">
+                            <img src="statics/雷覆泰故居.png" alt="雷覆泰故居" class="w-full h-full object-cover
+                   transition-transform duration-700 ease-out
+                   group-hover/img:scale-110 group-hover/img:rotate-[0.5deg]">
+                        </div>
+
+                        <div class="flex-1 flex flex-col justify-center text-left
+                transition-all duration-500
+                group-hover:translate-x-1">
+                            <h3 class="font-kaiti text-[38px] text-[#c15454] mb-4
+                   transition-all duration-500 ease-out
+                   hover:text-[#8B3A3A] hover:tracking-wide
+                   transform hover:scale-[1.02] hover:translate-x-2
+                   cursor-default">
+                                雷覆泰故居
+                            </h3>
+
+                            <div class="space-y-[14px]">
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-75
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">性质：</strong>
+                                    全国重点文物保护单位，日昇昌票号创始人、晋商金融鼻祖雷履泰的故居，典型清代晋中豪门民居建筑。
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-100
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">位置：</strong>
+                                    平遥古城书院街11号。
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-150
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">开放时间：</strong><br>
+                                    夏令时：08:00 – 18:30<br>
+                                    冬令时：08:00 – 17:30
+                                </p>
+
+                                <p class="font-serif-sc text-[#4A5568] text-[18px] leading-relaxed
+                     transition-all duration-500 delay-200
+                     hover:text-[#2D3748] hover:translate-x-1
+                     hover:bg-gradient-to-r hover:from-[#8B3A3A]/5 hover:to-transparent
+                     hover:pl-2 hover:rounded
+                     cursor-default">
+                                    <strong class="text-[#c15454] 
+                              transition-colors duration-500
+                              group-hover:text-[#8B3A3A]">预约/门票：</strong>
+                                    不单独售票，需购买125 元 / 人平遥古城全价通票（3 天有效，含 22 个核心景点）参观；学生等群体享 65 元优惠票，特定人群免票，现场核验、无需提前预约。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+        </section>
+    </main>
+    <script>
+        // 移动菜单切换
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mobileMenu = document.querySelector('#mobileMenu');  
+            const navLinks = document.querySelectorAll('#mobileMenu a');  
+
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function () {
+                    this.classList.toggle('active');
+                    mobileMenu.classList.toggle('opacity-0');
+                    mobileMenu.classList.toggle('-translate-y-full');
+
+                    // 切换显示/隐藏
+                    if (mobileMenu.classList.contains('opacity-0')) {
+                        mobileMenu.style.display = 'none';
+                    } else {
+                        mobileMenu.style.display = 'block';
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function () {
+                        mobileMenuBtn.classList.remove('active');
+                        mobileMenu.classList.add('opacity-0');
+                        mobileMenu.classList.add('-translate-y-full');
+                        mobileMenu.style.display = 'none';
+                    });
+                });
+
+                document.addEventListener('click', function (event) {
+                    if (!mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target) && !mobileMenu.classList.contains('opacity-0')) {
+                        mobileMenuBtn.classList.remove('active');
+                        mobileMenu.classList.add('opacity-0');
+                        mobileMenu.classList.add('-translate-y-full');
+                        mobileMenu.style.display = 'none';
+                    }
+                });
+            }
+
+            // 滚动监听 - 触发scroll-reveal动画
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.scroll-reveal').forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // 轮播图控制
+        let currentCardIndex = 0;
+        const galleryCards = document.querySelectorAll('.gallery-card');
+        const totalCards = galleryCards.length;
+
+        // 初始化卡片位置
+        function initGalleryCards() {
+            galleryCards.forEach((card, index) => {
+                card.classList.remove('active', 'left', 'right', 'bottom', 'hidden');
+                card.style.zIndex = 0;
+            });
+
+            // 设置初始位置
+            updateCardPositions();
+        }
+
+        // 更新卡片位置
+        function updateCardPositions() {
+            galleryCards.forEach((card, index) => {
+                // 移除所有位置类
+                card.classList.remove('active', 'left', 'right', 'bottom', 'hidden');
+                card.style.zIndex = 0;
+
+                // 计算相对位置
+                let position = (index - currentCardIndex + totalCards) % totalCards;
+
+                // 应用位置类
+                if (position === 0) {
+                    // 当前卡片
+                    card.classList.add('active');
+                    card.style.zIndex = 30;
+                } else if (position === 1) {
+                    // 下一个卡片（右侧）
+                    card.classList.add('right');
+                    card.style.zIndex = 20;
+                } else if (position === 2) {
+                    // 下一个的下一个（底部）
+                    card.classList.add('bottom');
+                    card.style.zIndex = 15;
+                } else if (position === 3) {
+                    // 上一个卡片（左侧）
+                    card.classList.add('left');
+                    card.style.zIndex = 20;
+                } else {
+                    // 其他卡片隐藏
+                    card.classList.add('hidden');
+                    card.style.zIndex = 1;
+                }
+            });
+        }
+
+        // 切换到指定卡片
+        function goToCard(index) {
+            if (index < 0) index = totalCards - 1;
+            if (index >= totalCards) index = 0;
+
+            currentCardIndex = index;
+            updateCardPositions();
+        }
+
+        // 下一张卡片
+        function nextCard() {
+            currentCardIndex = (currentCardIndex + 1) % totalCards;
+            updateCardPositions();
+        }
+
+        // 上一张卡片
+        function prevCard() {
+            currentCardIndex = (currentCardIndex - 1 + totalCards) % totalCards;
+            updateCardPositions();
+        }
+
+        // 绑定按钮事件
+        document.addEventListener('DOMContentLoaded', function () {
+            const prevBtn = document.getElementById('prevCard');
+            const nextBtn = document.getElementById('nextCard');
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', prevCard);
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', nextCard);
+            }
+
+            // 初始化轮播图
+            if (galleryCards.length > 0) {
+                initGalleryCards();
+
+                // 自动轮播
+                setInterval(() => {
+                    nextCard();
+                }, 5000);
+            }
+
+            // 绑定卡片点击事件
+            galleryCards.forEach((card, index) => {
+                card.addEventListener('click', function () {
+                    if (!this.classList.contains('active')) {
+                        goToCard(index);
+                    }
+                });
+            });
+        });
+
+        // 平滑滚动
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('a[href^="#"]');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+
+                    if (targetId === '#') return;
+
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerOffset = 80;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+
+        // 页面加载时的初始化
+        window.addEventListener('load', function () {
+            // 触发滚动监听，确保所有动画都能正确触发
+            setTimeout(() => {
+                window.dispatchEvent(new Event('scroll'));
+            }, 100);
+
+            // 初始化滚动监听
+            const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
+            const revealOnScroll = () => {
+                scrollRevealElements.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    const windowHeight = window.innerHeight;
+
+                    if (rect.top < windowHeight * 0.8 && rect.bottom > 0) {
+                        el.style.opacity = 1;
+                        el.style.transform = 'translateY(0)';
+                    }
+                });
+            };
+
+            revealOnScroll();
+            window.addEventListener('scroll', revealOnScroll);
+
+            // 确保轮播图正确初始化
+            if (galleryCards.length > 0) {
+                setTimeout(() => {
+                    initGalleryCards();
+                }, 200);
+            }
+        });
+        function toggleDropdown() {
+            const menu = document.getElementById("dropdownMenu");
+
+            if (menu.classList.contains("hidden")) {
+                menu.classList.remove("hidden");
+            } else {
+                menu.classList.add("hidden");
+            }
+        }
+    </script>
+</body>
+
+</html>

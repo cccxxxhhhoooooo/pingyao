@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>平遥民居 · 四因智慧 | 古建新韵</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --soil-brown: #6B4C3A;
+            --brick-red: #8B3A3A;
+            --dark-brick: #6B2828;
+            --sand-ochre: #C29A6B;
+            --paper-cream: #FDF7F0;
+            --ink-black: #2C2B29;
+            --golden-dim: #D9A13B;
+            --grey-blue: #4A5568;
+            --dark-wood: #5C3A1E;
+            --wood: #8B5A2B;
+            --light-wood: #A67C52;
+            --parchment: #F5F0E8;
+            --cream: #E8DFD3;
+            --gold: #D4AF37;
+            --light-gold: #F4E3A8;
+        }
+
+        body {
+            background: url("statics/背景4.jpeg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+            z-index: 0;
+            font-family: 'Noto Serif SC', 'Noto Sans SC', Georgia, serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .font-calligraphy {
+            font-family: 'Ma Shan Zheng', cursive !important;
+            letter-spacing: 0.1em;
+        }
+        
+        .font-serif-sc { 
+            font-family: 'Noto Serif SC', serif; 
+        }
+        
+        @keyframes navSlideIn {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .nav-slide-in {
+            animation: navSlideIn 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+        
+        @keyframes logoGlow {
+            0%, 100% { filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3)); }
+            50% { filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.6)); }
+        }
+        .logo-glow {
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+        
+        .nav-link-enhanced {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .nav-link-enhanced::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.15), transparent);
+            transition: left 0.6s ease;
+        }
+        .nav-link-enhanced:hover::before {
+            left: 100%;
+        }
+        .nav-link-enhanced::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), var(--light-gold), var(--gold));
+            transition: width 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-radius: 1px;
+        }
+        .nav-link-enhanced:hover::after {
+            width: 100%;
+        }
+        
+        .nav-elegant {
+            background: linear-gradient(135deg,
+                rgba(214, 128, 90, 0.95) 0%,
+                rgba(160, 101, 52, 0.92) 50%,
+                rgba(185, 118, 55, 0.89) 100%);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(212, 175, 55, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        
+        .main-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 7rem 2rem 4rem;
+        }
+        
+        .title-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .title-section h1 {
+                font-family: 'Ma Shan Zheng', cursive !important;
+                font-size: 5.8rem;
+                font-weight: 500;
+                letter-spacing: 8px;
+                color: #8a3a39;       
+                background: none;     
+                -webkit-background-clip: unset;
+                background-clip: unset;
+                text-shadow: 2px 2px 12px rgba(0,0,0,0.1);
+                margin-bottom: 0.75rem;
+            }
+        
+
+        .four-cards-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .nav-card {
+            min-width: 250px;
+            height: 140px;
+            background: rgba(253, 248, 240, 0.3);
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border: 1px solid rgba(210, 175, 120, 0.4);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        
+        .nav-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 252, 245, 0.5);
+            border-color: var(--gold);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.2);
+        }
+        
+        .nav-card.active {
+            background: linear-gradient(135deg, #fff8ef, #fef0e0);
+            border-left: 4px solid var(--gold);
+            border-right: 4px solid var(--gold);
+            box-shadow: 0 12px 28px -10px rgba(0,0,0,0.2);
+            transform: translateY(-4px);
+        }
+        
+        .nav-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+            display: inline-block;
+        }
+        
+        .nav-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #6C482C;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+        
+        .nav-card p {
+            font-size: 0.85rem;
+            color: #9B7B5C;
+            line-height: 1.4;
+        }
+        
+        /* 主内容区：诗意卡片展示区 */
+        .content-showcase {
+            background: rgba(253, 248, 240, 0.6);
+            backdrop-filter: blur(4px);
+            border-radius: 3rem;
+            padding: 2rem 2.5rem;
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.3);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            transition: all 0.4s;
+        }
+        
+        .detail-card {
+            display: none;
+            animation: fadeSlideUp 0.5s ease-out;
+        }
+        
+        .detail-card.active {
+            display: block;
+        }
+        
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .detail-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.8rem;
+            border-bottom: 2px dashed #E2CBB0;
+            padding-bottom: 0.8rem;
+        }
+        
+        .detail-header .big-icon {
+            font-size: 3rem;
+        }
+        
+        .detail-header h2 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #6C482C;
+            letter-spacing: 2px;
+        }
+        
+        .detail-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .detail-text {
+            flex: 2;
+            min-width: 260px;
+        }
+        
+        .detail-text p {
+            font-size: 1.2rem;
+            line-height: 1.85;
+            margin-bottom: 1.2rem;
+            color: #3D352C;
+            text-align: justify;
+        }
+        
+        .detail-text strong {
+            color: #B56A2E;
+            font-weight: 600;
+        }
+        
+        .poetry-quote {
+            margin: 1rem 0 1.5rem 0;
+            padding: 1rem 1.5rem;
+            background: rgba(217, 161, 59, 0.1);
+            border-left: 5px solid var(--gold);
+            border-radius: 1rem;
+            font-style: italic;
+            color: #7A5A3A;
+            font-size: 1.2rem;
+        }
+        
+        .detail-media {
+            flex: 1.3;
+            min-width: 240px;
+        }
+        
+        .img-art {
+            width: 100%;
+            height: 300px;
+            border-radius: 2rem;
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            box-shadow: 0 12px 24px -8px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+        
+        .img-art:hover {
+            transform: scale(1.02);
+        }
+        
+        .img-caption {
+            font-size: 0.75rem;
+            text-align: center;
+            color: #A68968;
+            margin-top: 0.8rem;
+            letter-spacing: 1px;
+        }
+        
+        .inspire-tag {
+            margin-top: 1.5rem;
+            text-align: right;
+            font-size: 0.85rem;
+            color: #B88F62;
+            border-top: 1px solid #EADCC8;
+            padding-top: 1rem;
+        }
+        
+        @media (max-width: 880px) {
+            .four-cards-nav {
+                gap: 1rem;
+            }
+            .nav-card {
+                min-width: 150px;
+                padding: 1rem 0.5rem;
+            }
+            .nav-icon {
+                font-size: 2.2rem;
+            }
+            .nav-card h3 {
+                font-size: 1.2rem;
+            }
+            .detail-header h2 {
+                font-size: 1.6rem;
+            }
+            .content-showcase {
+                padding: 1.5rem;
+            }
+            .detail-content {
+                flex-direction: column;
+            }
+            .main-container {
+                padding: 6rem 1.2rem 3rem;
+            }
+            .title-section h1 {
+                font-size: 2.4rem;
+                letter-spacing: 4px;
+            }
+        }
+        
+        @media (max-width: 680px) {
+            .four-cards-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .nav-card {
+                width: 100%;
+            }
+        }
+        
+        /* 点缀动画 */
+        @keyframes gentlePulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        .hint-floating {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: #7F6242;
+            background: rgba(240, 225, 200, 0.7);
+            display: inline-block;
+            padding: 0.4rem 1.8rem;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+        }
+        
+        .flex-center {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+<nav class="fixed w-full z-50 nav-elegant nav-slide-in border-b border-[#D4AF37]/20">
+    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent"></div>
+    <div class="max-w-7xl mx-auto px-6 h-24 flex justify-between items-center">
+        <div class="flex items-center space-x-4 group cursor-pointer">
+            <div class="relative">
+                <div class="absolute -inset-3 bg-gradient-to-br from-[#D4AF37]/30 via-[#8B3A3A]/20 to-[#5C3A1E]/20 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+                <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-[#F5F0E8] to-[#E8DFD3] flex items-center justify-center shadow-xl transition-all duration-500 group-hover:scale-105 group-hover:rotate-[3deg] logo-glow overflow-hidden">
+                    <div class="absolute inset-[6px] border-2 border-[#8B3A3A]/40 rounded-lg"></div>
+                    <div class="absolute inset-[10px] border border-[#D4AF37]/50 rounded-sm"></div>
+                    <span class="font-calligraphy text-4xl text-[#8B3A3A] relative z-10 transition-all duration-300 group-hover:text-[#6B2828]">平</span>
+                    <div class="absolute top-1 left-1 w-4 h-4 border-t-2 border-l-2 border-[#D4AF37]/60"></div>
+                    <div class="absolute bottom-1 right-1 w-4 h-4 border-b-2 border-r-2 border-[#D4AF37]/60"></div>
+                </div>
+                <div class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#D4AF37] rounded-full shadow-md"></div>
+                <div class="absolute -bottom-1 -left-1 w-2.5 h-2.5 bg-[#8B3A3A] rounded-full shadow-md"></div>
+            </div>
+            <div class="flex flex-col">
+                <span class="font-calligraphy text-2xl text-[#F5F0E8] font-bold tracking-[0.15em] transition-colors duration-300 group-hover:text-[#D4AF37]">平遥古城</span>
+                <span class="font-serif-sc text-xs text-[#D4C4B0] tracking-[0.3em] opacity-90 mt-1">PINGYAO ANCIENT CITY</span>
+                <div class="w-20 h-0.5 bg-gradient-to-r from-[#D4AF37] to-transparent mt-2 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+            </div>
+        </div>
+        
+        <div class="hidden lg:flex items-center space-x-1">
+            <div class="flex items-center space-x-1 bg-gradient-to-r from-[#5C3A1E]/20 to-[#8B3A3A]/20 backdrop-blur-sm rounded-2xl px-2 py-2 border border-[#D4AF37]/10">
+                <a href="index.html" class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+                    <i class="fas fa-home text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                    <span>首页</span>
+                </a>
+                <div class="w-px h-6 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+                <a href="探索民居.html" class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+                    <i class="fas fa-building text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                    <span>探索民居</span>
+                </a>
+                <div class="w-px h-6 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+                <a href="解构建筑.html" class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+                    <i class="fas fa-theater-masks text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                    <span>解构建筑</span>
+                </a>
+                <div class="w-px h-6 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+                <a href="营造四因.html" class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group border-b-2 border-[#D4AF37]">
+                    <i class="fas fa-archway text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                    <span>营造四因</span>
+                </a>
+               <div class="nav-dropdown-parent relative">
+    <a href="javascript:void(0)" onclick="toggleDropdown()" class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+        <i class="fas fa-theater-masks text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+        <span>互动体验</span>
+    </a>
+
+            <!-- 下拉菜单 -->
+        <div id="dropdownMenu" class="nav-dropdown absolute left-0 mt-2 w-48 bg-[#5C3A1E]/95 backdrop-blur-md rounded-xl shadow-lg border border-[#D4AF37]/20 overflow-hidden z-50 hidden">
+
+        <a href="答题页面.html" class="block px-4 py-3 text-base font-serif-sc text-[#F5F0E8] hover:bg-[#8B3A3A]/30 hover:text-[#D4AF37] transition">
+            🧠 答题页面
+        </a>
+
+        <a href="抽卡页面.html" class="block px-4 py-3 text-base font-serif-sc text-[#F5F0E8] hover:bg-[#8B3A3A]/30 hover:text-[#D4AF37] transition">
+            🎴 抽卡页面
+        </a>
+
+        <a href="问答页面.html" class="block px-4 py-3 text-base font-serif-sc text-[#F5F0E8] hover:bg-[#8B3A3A]/30 hover:text-[#D4AF37] transition">
+            💬 问答页面
+        </a>
+
+    </div>
+</div>
+                <div class="w-px h-6 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+                <a href="知筑践行.html" class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+                    <i class="fas fa-leaf text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                    <span>知筑践行</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#D4AF37]/20 via-[#D4AF37] to-[#D4AF37]/20"></div>
+</nav>
+
+<div class="main-container">
+    <div class="title-section">
+        <h1>平遥民居·四因智慧</h1>
+        
+    </div>
+
+    <!-- 横向四因卡片导航 -->
+    <div class="four-cards-nav">
+        <div class="nav-card" data-target="0">
+            <div class="nav-icon">🏔️</div>
+            <h3>地形</h3>
+            <p>黄土塬梁 · 窑洞基因</p>
+        </div>
+        <div class="nav-card" data-target="1">
+            <div class="nav-icon">🧱</div>
+            <h3>材料</h3>
+            <p>土木砖石 · 自然诗篇</p>
+        </div>
+        <div class="nav-card" data-target="2">
+            <div class="nav-icon">☀️</div>
+            <h3>气候</h3>
+            <p>风沙严寒 · 暖意营构</p>
+        </div>
+        <div class="nav-card" data-target="3">
+            <div class="nav-icon">🏛️</div>
+            <h3>人文</h3>
+            <p>礼序风水 · 晋商传承</p>
+        </div>
+    </div>
+
+    <!-- 内容展示区 -->
+    <div class="content-showcase">
+        <!-- 地形卡片 -->
+        <div class="detail-card" id="detail-0">
+            <div class="detail-header">
+                <div class="big-icon">🏔️</div>
+                <h2>地形</h2>
+            </div>
+            <div class="detail-content">
+                <div class="detail-text">
+                    <p>山西地处黄土高原，太行、吕梁二山纵贯，晋中盆地虽平坦却被散列山脉阻隔。村落多依山就势，沟壑纵横的地形直接催生了<strong>窑洞民居</strong>。平遥民居多见<strong>独立式锢窑</strong>——脱离崖坡独立砌筑，覆土而建，拱券前廊，后墙封闭。这种形式既节省木材，又兼具生土建筑的恒温特性，是大地与匠心的共鸣。</p>
+                    <p>窑洞主要分为独立式、下沉式和靠崖式三种，平遥地区以独立式最为典型，体现了黄土高原民居的独特适应性。犹如大地深处长出的居所，冬暖夏凉，与黄土塬共生共息。</p>
+                    <div class="poetry-quote">
+                        <i class="fas fa-feather-alt mr-2"></i> “依山就势，沟壑作庭；黄土为壁，拱券藏风。”
+                    </div>
+                </div>
+                <div class="detail-media">
+                    <div class="img-art" style="background-image: linear-gradient(125deg, #b78757, #e0c3a2), url('statics/独立式窑洞.jpeg')"></div>
+                    <div class="img-caption">▲ 独立式窑洞</div>
+                </div>
+            </div>
+            <div class="inspire-tag">
+                <i class="fas fa-map-marked-alt mr-1"></i> 因地形而生
+            </div>
+        </div>
+
+        <!-- 材料卡片 -->
+        <div class="detail-card" id="detail-1">
+            <div class="detail-header">
+                <div class="big-icon">🧱</div>
+                <h2>传统材料 · 取于自然的建造诗篇</h2>
+            </div>
+            <div class="detail-content">
+                <div class="detail-text">
+                    <p>太行砂岩坚固耐蚀，用于台基与墙体；吕梁黄土细腻稳定，成就窑洞厚墙。山西干燥少雨，使得土、石、砖、瓦成为绝佳建材。平遥一带晋商兴盛，木材运用广泛，抬梁木架与砖石墙体相融，热工性能卓越。<strong>冬暖夏凉</strong>并非神话，而是生土材料热惰性带来的真实写照，古人的低碳智慧至今令人赞叹。</p>
+                    <p>除了石料和土、砖瓦之外，晋中地区树林较多，经济也较发达，木材也成为平遥民居建筑的主要用材，形成了砖木混合的独特体系。</p>
+                    <div class="poetry-quote">
+                        <i class="fas fa-tree mr-2"></i> “取土成砖，伐木为梁；一石一瓦，皆承天赐。”
+                    </div>
+                </div>
+                <div class="detail-media">
+                    <div class="img-art" style="background-image: linear-gradient(115deg, #b27d52, #dec096), url('statics/材料.png'); background-blend-mode: overlay; background-size: cover;"></div>
+                    <div class="img-caption">▲ 青砖、石材与木构，浑然天成的材料交响</div>
+                </div>
+            </div>
+            <div class="inspire-tag">
+                <i class="fas fa-recycle mr-1"></i> 因材料而筑 · 自然馈赠与匠作智慧
+            </div>
+        </div>
+
+        <!-- 气候卡片 -->
+        <div class="detail-card" id="detail-2">
+            <div class="detail-header">
+                <div class="big-icon">☀️</div>
+                <h2>地方气候 · 风沙与严寒中的暖意</h2>
+            </div>
+            <div class="detail-content">
+                <div class="detail-text">
+                    <p>温带季风气候让平遥冬长严寒，春季风沙漫天。民居以<strong>坐北朝南、窄长院落</strong>最大限度获取日照，火炕占据半间房，成为家庭核心热源。高墙窄院既防风沙又营造私密领域，外封闭内开敞的空间形制，是北方民居应对恶劣气候的经典答卷。</p>
+                    <p>由于晋中地区秋冬季风沙较大，平遥民居院墙高筑，这种布局方式对防风沙较为有利，且有营造私密空间的作用，体现了建筑对气候的精准回应。</p>
+                    <div class="poetry-quote">
+                        <i class="fas fa-wind mr-2"></i> “高墙锁风沙，窄院纳暖阳；火炕温如春，冬日不觉长。”
+                    </div>
+                </div>
+                <div class="detail-media">
+                    <div class="img-art" style="background-image: linear-gradient(130deg, #b4814f, #ddbc91), url('statics/高墙.png'); background-blend-mode: overlay; background-size: cover;"></div>
+                    <div class="img-caption">▲ 窄院高墙</div>
+                </div>
+            </div>
+            <div class="inspire-tag">
+                <i class="fas fa-snowflake mr-1"></i> 因气候而适 · 抵御严寒与风沙的匠心
+            </div>
+        </div>
+
+        <!-- 人文卡片 -->
+        <div class="detail-card" id="detail-3">
+            <div class="detail-header">
+                <div class="big-icon">🏛️</div>
+                <h2>人文因素 · 礼序乾坤与风水意象</h2>
+            </div>
+            <div class="detail-content">
+                <div class="detail-text">
+                    <p>合院格局深植宗法礼制，"北屋为尊，两厢次之"体现儒家伦理。风水理论强调<strong>负阴抱阳、背山面水</strong>，平遥民居通过建筑层高、地坪错落模拟环抱之势，照壁、影雕寓意纳福。晋商文化更添精致砖雕与垂花门，深宅大院中沉淀着家族传承与天地人和的哲思。</p>
+                    <p>平遥传统民居更为注重院落的朝向以及建筑的格局，通过建筑物层数高地和地坪的调整，使整幢建筑前低后高和左右翼呈环抱状，模拟负阴抱阳的自然环境。</p>
+                    <div class="poetry-quote">
+                        <i class="fas fa-yin-yang mr-2"></i> “礼序藏深院，风水纳吉祥；雕梁画栋处，家族岁月长。”
+                    </div>
+                </div>
+                <div class="detail-media">
+                    <div class="img-art" style="background-image: linear-gradient(125deg, #b98759, #e5c6a0), url('statics/风水.png'); background-blend-mode: overlay; background-size: cover;"></div>
+                    <div class="img-caption">▲ 院落格局与后天八卦</div>
+                </div>
+            </div>
+            <div class="inspire-tag">
+                <i class="fas fa-hand-sparkles mr-1"></i> 因人文而韵 · 宗法礼序与天地人和
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+    function toggleDropdown() {
+    const menu = document.getElementById("dropdownMenu");
+
+    if (menu.classList.contains("hidden")) {
+        menu.classList.remove("hidden");
+    } else {
+        menu.classList.add("hidden");
+    }
+}
+    (function() {
+        // 获取所有导航卡片和详情卡片
+        const navCards = document.querySelectorAll('.nav-card');
+        const detailCards = [
+            document.getElementById('detail-0'),
+            document.getElementById('detail-1'),
+            document.getElementById('detail-2'),
+            document.getElementById('detail-3')
+        ];
+        
+        // 默认激活第一个 (地形)
+        let currentIndex = 0;
+        
+        function switchToTab(index) {
+            if (index === currentIndex && detailCards[index] && detailCards[index].classList.contains('active')) return;
+            
+            // 更新导航卡片的激活样式
+            navCards.forEach((card, i) => {
+                if (i === index) {
+                    card.classList.add('active');
+                } else {
+                    card.classList.remove('active');
+                }
+            });
+            
+            // 更新详情卡片显示
+            detailCards.forEach((card, i) => {
+                if (card) {
+                    if (i === index) {
+                        card.classList.add('active');
+                    } else {
+                        card.classList.remove('active');
+                    }
+                }
+            });
+            
+            currentIndex = index;
+        }
+        
+        // 绑定点击事件
+        navCards.forEach((card) => {
+            const targetAttr = card.getAttribute('data-target');
+            if (targetAttr !== null) {
+                const idx = parseInt(targetAttr, 10);
+                card.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    switchToTab(idx);
+                    // 增加微妙的触感
+                    card.style.transform = "scale(0.98)";
+                    setTimeout(() => {
+                        card.style.transform = "";
+                    }, 120);
+                });
+                card.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    switchToTab(idx);
+                    card.style.transform = "scale(0.98)";
+                    setTimeout(() => {
+                        card.style.transform = "";
+                    }, 120);
+                });
+            }
+        });
+        
+        // 初始化：显示地形卡片，且地形导航为active
+        switchToTab(0);
+    })();
+</script>
+</body>
+</html>
