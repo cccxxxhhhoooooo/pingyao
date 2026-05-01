@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>互动体验 | 平遥古城智寻</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased overflow-hidden font-serif-sc">
+    <div class="fixed inset-0 z-0 bg-black/30 backdrop-blur-[6px]"></div>
+
+    <!-- 完全从答题页面复制的导航栏 -->
+    <nav class="fixed w-full z-50 nav-elegant nav-slide-in border-b border-[#D4AF37]/20">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 h-24 flex justify-between items-center">
+            <!-- 左侧徽标区域 -->
+            <div class="flex items-center space-x-4 group cursor-pointer">
+                <div class="relative">
+                    <div
+                        class="absolute -inset-3 bg-gradient-to-br from-[#D4AF37]/30 via-[#8B3A3A]/20 to-[#5C3A1E]/20 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-700">
+                    </div>
+                    <div
+                        class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-[#F5F0E8] to-[#E8DFD3] flex items-center justify-center shadow-xl transition-all duration-500 group-hover:scale-105 group-hover:rotate-[3deg] logo-glow overflow-hidden">
+                        <div class="absolute inset-[6px] border-2 border-[#8B3A3A]/40 rounded-lg"></div>
+                        <div class="absolute inset-[10px] border border-[#D4AF37]/50 rounded-sm"></div>
+                        <span
+                            class="font-calligraphy text-4xl text-[#8B3A3A] relative z-10 transition-all duration-300 group-hover:text-[#6B2828]">平</span>
+                        <div class="absolute top-1 left-1 w-4 h-4 border-t-2 border-l-2 border-[#D4AF37]/60"></div>
+                        <div class="absolute bottom-1 right-1 w-4 h-4 border-b-2 border-r-2 border-[#D4AF37]/60"></div>
+                    </div>
+                    <div class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#D4AF37] rounded-full shadow-md"></div>
+                    <div class="absolute -bottom-1 -left-1 w-2.5 h-2.5 bg-[#8B3A3A] rounded-full shadow-md"></div>
+                </div>
+                <div class="flex flex-col">
+                    <span
+                        class="font-calligraphy text-2xl text-[#F5F0E8] font-bold tracking-[0.15em] transition-colors duration-300 group-hover:text-[#D4AF37]">平遥古城</span>
+                    <span class="font-serif-sc text-xs text-[#D4C4B0] tracking-[0.3em] opacity-90 mt-1">PINGYAO ANCIENT
+                        CITY</span>
+                    <div
+                        class="w-20 h-0.5 bg-gradient-to-r from-[#D4AF37] to-transparent mt-2 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 桌面端导航菜单 -->
+<div class="hidden lg:flex items-center space-x-1">
+    <div
+        class="flex items-center space-x-1 bg-gradient-to-r from-[#5C3A1E]/20 to-[#8B3A3A]/20 backdrop-blur-sm rounded-2xl px-2 py-2 border border-[#D4AF37]/10">
+        <div class="nav-dropdown-parent relative">
+            <a href="index.html"
+                class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+                <i
+                    class="fas fa-home text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                <span>首页</span>
+            </a>
+        </div>
+        <div class="w-px h-6 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+        <div class="nav-dropdown-parent relative">
+            <a href="探索民居.html"
+                class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+                <i
+                    class="fas fa-building text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                <span>探索民居</span>
+            </a>
+        </div>
+        <div class="w-px h-6 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+        <div class="nav-dropdown-parent relative">
+            <a href="解构建筑.html"
+                class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+                <i
+                    class="fas fa-archway text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                <span>解构建筑</span>
+            </a>
+        </div>
+        <div class="w-px h-6 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+        <a href="#"
+            class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+            <i
+                class="fas fa-palette text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+            <span>营造艺术</span>
+        </a>
+        <div class="w-px h-6 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+        
+        <!-- 互动体验下拉菜单 -->
+        <div class="nav-dropdown-parent relative">
+            <a href="#" 
+                 class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group border-b-2 border-[#D4AF37]">
+                <i class="fas fa-theater-masks text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+                <span>互动体验</span>
+            </a>
+            <!-- 下拉菜单 -->
+            <div id="dropdownMenu" class="nav-dropdown absolute left-0 mt-2 w-48 bg-[#5C3A1E]/95 backdrop-blur-md rounded-xl shadow-lg border border-[#D4AF37]/20 overflow-hidden z-50 ">
+                <a href="答题页面.html" 
+                   class="block px-4 py-3 text-base font-serif-sc text-[#F5F0E8] hover:bg-[#8B3A3A]/30 hover:text-[#D4AF37] transition">
+                    🧠 答题页面
+                </a>
+                <a href="抽卡页面.html" 
+                   class="block px-4 py-3 text-base font-serif-sc text-[#F5F0E8] hover:bg-[#8B3A3A]/30 hover:text-[#D4AF37] transition">
+                    🎴 抽卡页面
+                </a>
+                <a href="问答页面.html" 
+                   class="block px-4 py-3 text-base font-serif-sc text-[#F5F0E8] hover:bg-[#8B3A3A]/30 hover:text-[#D4AF37] transition">
+                    💬 问答页面
+                </a>
+            </div>
+        </div>
+        
+        <div class="w-px h-6 bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+        <a href="#"
+            class="nav-link-enhanced px-6 py-3 font-serif-sc text-lg text-[#F5F0E8] hover:text-[#D4AF37] transition-all duration-300 flex items-center space-x-2 group">
+            <i
+                class="fas fa-shield-alt text-sm text-[#D4AF37] group-hover:rotate-12 transition-transform"></i>
+            <span>知筑践行</span>
+        </a>
+    </div>
+</div>
+
+            <!-- 移动端菜单按钮 -->
+            <div class="lg:hidden">
+                <button class="mobile-menu-btn relative z-50" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 移动端下拉菜单 -->
+        <div id="mobileMenu"
+            class="lg:hidden absolute top-full left-0 w-full bg-gradient-to-b from-[#8B3A3A]/95 to-[#5C3A1E]/95 backdrop-blur-lg shadow-2xl border-b border-[#D4AF37]/20 transform -translate-y-full opacity-0 transition-all duration-300">
+            <div class="px-6 py-8">
+                <div class="space-y-4">
+                    <a href="index.html"
+                        class="flex items-center space-x-3 px-4 py-3 text-[#F5F0E8] hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all duration-200"><i
+                            class="fas fa-home text-lg text-[#D4AF37]"></i><span
+                            class="font-serif-sc text-lg">首页</span></a>
+                    <a href="探索民居.html"
+                        class="flex items-center space-x-3 px-4 py-3 text-[#D4AF37] hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all duration-200"><i
+                            class="fas fa-building text-lg text-[#D4AF37]"></i><span
+                            class="font-serif-sc text-lg font-semibold">探索民居</span></a>
+                    <a href="解构建筑.html"
+                        class="flex items-center space-x-3 px-4 py-3 text-[#F5F0E8] hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all duration-200"><i
+                            class="fas fa-archway text-lg text-[#D4AF37]"></i><span
+                            class="font-serif-sc text-lg">解构建筑</span></a>
+                    <a href="营造四因.html"
+                        class="flex items-center space-x-3 px-4 py-3 text-[#F5F0E8] hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all duration-200"><i
+                            class="fas fa-theater-masks text-lg text-[#D4AF37]"></i><span
+                            class="font-serif-sc text-lg">营造四因</span></a>
+                    <a href="#"
+                        class="flex items-center space-x-3 px-4 py-3 text-[#F5F0E8] hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all duration-200"><i
+                            class="fas fa-gamepad text-lg text-[#D4AF37]"></i><span
+                            class="font-serif-sc text-lg">互动体验</span></a>
+                    <a href="知筑践行.html"
+                        class="flex items-center space-x-3 px-4 py-3 text-[#F5F0E8] hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all duration-200"><i
+                            class="fas fa-shield-alt text-lg text-[#D4AF37]"></i><span
+                            class="font-serif-sc text-lg">知筑践行</span></a>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#D4AF37]/20 via-[#D4AF37] to-[#D4AF37]/20">
+        </div>
+    </nav>
+
+    <main class="h-screen w-full flex flex-col items-center justify-center pt-32 px-4 relative z-10">
+        <div class="side-decor left-side font-calligraphy">明清遗韵传千古</div>
+        <div class="side-decor right-side font-calligraphy">晋商故里话风云</div>
+
+        <div class="max-w-4xl w-full flex flex-col">
+            <header class="text-center mb-8">
+                <h1 class="brush-title-light font-calligraphy text-7xl text-[#F4E3A8] mb-2 drop-shadow-2xl">古城智寻</h1>
+                <div class="relative w-64 h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent mx-auto"></div>
+            </header>
+
+            <div class="master-qa-box rounded-[2.5rem] border-4 border-double border-[#D4AF37]/50 shadow-[0_20px_60px_rgba(0,0,0,0.5)] flex flex-col relative overflow-hidden">
+                <div class="antique-corner top-left"></div>
+                <div class="antique-corner top-right"></div>
+                <div class="antique-corner bottom-left"></div>
+                <div class="antique-corner bottom-right"></div>
+
+                <div id="chatBox" class="chat-window flex-1 p-10 overflow-y-auto bg-white/10 backdrop-blur-md"></div>
+                
+                <div class="action-bar p-8 pt-12 border-t border-[#D4AF37]/20 bg-black/40 backdrop-blur-xl relative">
+                    <button onclick="toggleActionBar()" class="toggle-tab absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-8 bg-[#8B3A3A] border-2 border-[#D4AF37] border-b-0 rounded-t-xl flex items-center justify-center text-[#D4AF37] hover:text-white transition-all z-20">
+                        <i id="toggleIcon" class="fas fa-chevron-down text-lg"></i>
+                    </button>
+
+                    <div class="flex items-center justify-between mb-5 px-4">
+                        <label class="flex items-center cursor-pointer group">
+                            <input type="checkbox" id="thinkToggle" class="sr-only" checked>
+                            <div class="w-12 h-6 bg-gray-500 rounded-full relative transition-all duration-300 custom-toggle peer-checked:bg-[#8B3A3A]">
+                                <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-300 shadow-md"></div>
+                            </div>
+                            <span class="ml-4 text-xs text-[#F5F0E8] font-bold tracking-widest drop-shadow-md">展示使者深思</span>
+                        </label>
+                        <button onclick="newSession()" class="text-[10px] text-[#F4E3A8] font-bold tracking-widest uppercase hover:text-white transition-colors">
+                            <i class="fas fa-rotate-right mr-1"></i> RESET SESSION
+                        </button>
+                    </div>
+
+                    <div class="relative flex items-center bg-white/90 rounded-2xl border-2 border-[#5C3A1E] shadow-2xl focus-within:ring-4 ring-[#8B3A3A]/20 transition-all overflow-hidden">
+                        <input type="text" id="userInput" placeholder="请输入疑问，对话千年古城..." class="flex-1 p-5 outline-none text-[#5C3A1E] text-sm bg-transparent font-medium">
+                        <button onclick="sendQuestion()" class="bg-[#8B3A3A] text-white px-12 py-5 hover:bg-[#6B2828] transition-all font-calligraphy text-2xl shadow-lg">询访</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 导航栏滚动效果
+        let lastScroll = 0;
+        const navbar = document.querySelector('nav');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll <= 0) {
+                navbar.style.transform = 'translateY(0)';
+            }
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                navbar.style.transform = 'translateY(-100%)';
+            } else if (currentScroll < lastScroll) {
+                navbar.style.transform = 'translateY(0)';
+            }
+            lastScroll = currentScroll;
+        });
+
+        // 导航链接点击效果
+        const navLinks = document.querySelectorAll('.nav-link-enhanced');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => { this.style.transform = ''; }, 150);
+                const mobileMenu = document.getElementById('mobileMenu');
+                const menuBtn = document.querySelector('.mobile-menu-btn');
+                if (!mobileMenu.classList.contains('opacity-0')) {
+                    menuBtn.classList.remove('active');
+                    mobileMenu.classList.remove('opacity-100', 'translate-y-0');
+                    mobileMenu.classList.add('opacity-0', '-translate-y-full');
+                }
+            });
+        });
+    </script>
+
+    <script src="app.js"></script>
+</body>
+</html>
